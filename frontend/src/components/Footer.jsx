@@ -1,0 +1,129 @@
+import { useData } from '../context/DataContext';
+
+function Footer() {
+    const { businessInfo } = useData() || {};
+
+    if (businessInfo && businessInfo.maintenance) return null;
+
+    const hours = businessInfo?.openingHours || { Mon: '09:00 - 19:00', Tue: '09:00 - 19:00', Wed: '09:00 - 19:00', Thu: '09:00 - 19:00', Fri: '09:00 - 19:00', Sat: '09:00 - 19:00', Sun: 'Closed' };
+
+    return (
+        <footer className="bg-[#0f1720] text-gray-200">
+            <div className="max-w-7xl mx-auto px-6 md:px-8 py-12 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                {/* Left: Branding & CTA */}
+                <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                        <img src="/images/LOGO.png" alt="Panditan Di Hatti" className="w-14 h-14 object-contain rounded" />
+                        <div>
+                            <h3 className="text-2xl font-extrabold text-[#b14520]">Panditan Di Hatti</h3>
+                            <p className="text-sm text-gray-500">Authentic Himachali sweets & snacks</p>
+                        </div>
+                    </div>
+
+                    <p className="text-sm text-gray-300 leading-relaxed max-w-xl">{businessInfo?.aboutUs || 'Family-run sweet shop since 1980. Come taste our traditional recipes made with love.'}</p>
+
+                    <div className="flex items-center gap-3 mt-2">
+                        <a href={`tel:${businessInfo?.phone || ''}`} className="inline-flex items-center gap-3 px-5 py-3 bg-gradient-to-br from-[#ff9a3c] to-[#ff6a00] text-white rounded-lg shadow-lg ring-1 ring-white/10 hover:opacity-95">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.09 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.12 1.05.38 2.07.75 3.03a2 2 0 0 1-.45 2.11L9.91 10.09a16 16 0 0 0 6 6l1.23-1.23a2 2 0 0 1 2.11-.45c.96.37 1.98.63 3.03.75A2 2 0 0 1 22 16.92z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                            <span className="font-extrabold text-lg md:text-xl">{businessInfo?.phone || '98166-51543'}</span>
+                        </a>
+
+                        <a href={`https://wa.me/${businessInfo?.phone || ''}`} target="_blank" rel="noreferrer" className="text-gray-500 hover:text-gray-700">WhatsApp</a>
+                    </div>
+
+                    <div className="flex items-center gap-4 mt-4 text-sm">
+                        <a href="#" className="text-gray-300 hover:text-white">Privacy</a>
+                        <span className="text-gray-600">•</span>
+                        <a href="#" className="text-gray-300 hover:text-white">Terms</a>
+                        <span className="text-gray-600">•</span>
+                        <a href="#" className="text-gray-300 hover:text-white">Contact</a>
+                    </div>
+                </div>
+
+                {/* Middle: Opening hours */}
+                <div>
+                    <h4 className="text-lg font-bold text-gray-100 mb-3">Opening Hours</h4>
+                    <div className="grid grid-cols-1 gap-2 text-sm text-gray-300">
+                        {Object.entries(hours).map(([day, time]) => {
+                            const todayName = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+                            const isToday = day === todayName;
+
+                            const parseTimeRange = (t) => {
+                                if (!t || /closed/i.test(t)) return null;
+                                const parts = t.split(/[-–—]/).map(s => s.trim());
+                                if (parts.length < 2) return null;
+                                const parsePart = (p) => {
+                                    // p like '08:00 AM' or '08:30 PM'
+                                    const m = p.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+                                    if (!m) return null;
+                                    let hh = parseInt(m[1], 10);
+                                    const mm = parseInt(m[2], 10);
+                                    const ampm = m[3].toUpperCase();
+                                    if (ampm === 'PM' && hh !== 12) hh += 12;
+                                    if (ampm === 'AM' && hh === 12) hh = 0;
+                                    const d = new Date();
+                                    d.setHours(hh, mm, 0, 0);
+                                    return d;
+                                };
+                                const start = parsePart(parts[0]);
+                                const end = parsePart(parts[1]);
+                                return { start, end };
+                            };
+
+                            const range = parseTimeRange(time);
+                            let openNow = false;
+                            if (range && range.start && range.end) {
+                                const now = new Date();
+                                // if end is earlier than start, assume it goes past midnight
+                                if (range.end <= range.start) {
+                                    // treat end as next day
+                                    range.end.setDate(range.end.getDate() + 1);
+                                }
+                                openNow = now >= range.start && now <= range.end && isToday;
+                            }
+
+                            return (
+                                <div key={day} className={`flex items-center justify-between py-2 px-3 rounded-lg ${isToday ? 'bg-white/3 ring-1 ring-white/5' : ''}`}>
+                                    <div className="flex items-center gap-3">
+                                        <span className="w-28 text-sm font-medium text-gray-200">{day}</span>
+                                        <span className="text-sm text-gray-300">{time}</span>
+                                    </div>
+                                    <div className="ml-2">
+                                        {isToday && (
+                                            <span className={`px-2 py-0.5 text-xs rounded-full font-semibold ${openNow ? 'bg-emerald-500 text-white' : 'bg-red-500 text-white'}`}>
+                                                {openNow ? 'Open now' : 'Closed'}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                {/* Right: Map */}
+                <div>
+                    <h4 className="text-lg font-bold text-gray-100 mb-3">Visit Us</h4>
+                    <div className="w-full h-40 rounded overflow-hidden border border-gray-800 shadow-sm">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d848.6498086260543!2d76.51992589999999!3d31.699522208486563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3904d443ecf19601%3A0xffb6a63e8aae8b2f!2sPanditan%20Di%20Hatti!5e0!3m2!1sen!2sin!4v1764696376808!5m2!1sen!2sin"
+                            allowFullScreen
+                            loading="lazy"
+                            title="Location Map"
+                            className="w-full h-full"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div className="bg-[#0b1220] border-t border-gray-900">
+                <div className="max-w-7xl mx-auto px-6 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400">
+                    <div>© {new Date().getFullYear()} Panditan Di Hatti</div>
+                    <div className="mt-2 md:mt-0">Website designed by Harshit — Licensed under MIT</div>
+                </div>
+            </div>
+        </footer>
+    );
+}
+
+export default Footer;

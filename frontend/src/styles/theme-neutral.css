@@ -1,0 +1,70 @@
+/* Neutral theme overrides */
+:root{
+  /* Neutral Orange theme */
+  --bg: #FFF8F3;        /* warm off-white background */
+  --text: #2b2a28;      /* dark neutral text */
+  --nav-bg: #B86B2E;    /* muted orange-brown header */
+  --nav-text: #ffffff;
+  --accent: #E0893A;    /* neutral orange accent */
+  --accent-dark: #B76A2A;/* deeper orange */
+  --muted: #F6ECE6;     /* soft panel background */
+  --highlight: #FFF3E6; /* subtle highlight */
+  /* Typography */
+  --font-sans: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --base-font-size: 16px;
+  --h1-size: 2.5rem;
+  --h2-size: 1.75rem;
+  --btn-radius: 10px;
+}
+
+/* General */
+body{ background:var(--bg) !important; color:var(--text) !important; }
+nav{ background:var(--nav-bg) !important; }
+nav a{ color:var(--nav-text) !important; }
+nav a:hover{ background:var(--accent-dark) !important; }
+nav a.active{ background:var(--muted) !important; color:var(--accent-dark) !important; }
+.hamburger span{ background:var(--nav-text) !important; }
+
+/* Hero */
+header.hero{ background: linear-gradient(120deg,var(--highlight),var(--muted)) !important; }
+header.hero .tagline{ color:var(--accent-dark) !important; }
+
+/* Buttons */
+.filter-btn, .filter-btn:hover{ background:var(--accent) !important; }
+.filter-btn.active{ background:#a09a93 !important; }
+a.zomato-order{ background:var(--accent-dark) !important; }
+
+/* Overlay and accents */
+.menu-img .overlay{ background: rgba(111,97,88,0.92) !important; }
+.video-overlay-text{ background: rgba(111,97,88,0.85) !important; }
+.opening-hours{ background: var(--muted) !important; color:var(--text) !important; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.opening-hours h3{ color:var(--text) !important; }
+.opening-hours li{ background: rgba(255,255,255,0.6) !important; color:var(--text) !important; }
+.opening-hours .day{ color: #000 !important; font-weight: 700 !important; }
+.opening-hours .time{ font-weight: 700 !important; color: var(--accent) !important; }
+
+/* Reviews */
+.review-card{ background:#f6f5f5 !important; border-color:#f1ebeb !important; }
+.avatar{ border-color:#cbbfb6 !important; }
+.stars{ color:#a88f7f !important; }
+
+/* Footer */
+footer, .footer{ background: #2f2f2f !important; }
+.footer-info h3{ color:var(--accent) !important; }
+
+/* Forms */
+.login, .signup, .forgot-password{ background: var(--muted) !important; }
+.login h2, .signup h2, .forgot-password h2{ color:var(--accent-dark) !important; }
+.login button, .signup button, .forgot-password button{ background:var(--accent) !important; }
+.login button:hover, .signup button:hover, .forgot-password button:hover{ background:var(--accent-dark) !important; }
+
+/* CTAs */
+.cta-btn{ background:#c9b08f !important; color:#000 !important; }
+.links a:hover{ color: #8b7f74 !important; border-color: #8b7f74 !important; }
+
+/* SpecialOffer box and badges */
+.w-12.h-12.bg-gradient-to-br { background: linear-gradient(135deg,var(--muted),var(--accent)) !important; }
+
+/* make sure images/overlays look balanced */
+.menu-img img{ filter: saturate(0.95) contrast(0.98) !important; }
