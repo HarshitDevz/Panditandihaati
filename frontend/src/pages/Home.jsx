@@ -78,19 +78,24 @@ function Home() {
             {/* Menu Section */}
             <section className="menu text-center">
                 <h2>Our Specialties</h2>
-
-                <CategoryFilter categories={[]} selected={selectedCategory} onSelect={setSelectedCategory} />
+                <div className="flex items-center justify-center gap-4 mt-4">
+                    <CategoryFilter categories={[]} selected={selectedCategory} onSelect={setSelectedCategory} />
+                </div>
 
                 <motion.div className="menu-grid flex flex-wrap justify-center items-center gap-6 mt-8" variants={gridContainer} initial="hidden" animate="visible">
-                    {products.filter(p => p.visible && (selectedCategory === 'All' || p.category === selectedCategory)).map(product => (
-                        <motion.div key={product.id} className="menu-item border-none !m-0" variants={gridItem}>
+                    {products.filter(p => p.visible && (p.name && /besan barfi/i.test(p.name))).slice(0,1).map(product => (
+                        <motion.div key={product.id} className="menu-item border-none !m-0 w-full max-w-sm mx-auto" variants={gridItem}>
                             <Link to="/menu.html">
-                                <motion.div className="menu-img relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition duration-300" whileHover={{ scale: 1.03 }}>
-                                    <img src={product.image} loading="lazy" alt={product.name} className="w-full h-full object-cover transition duration-500 hover:scale-110" />
-                                    <div className="overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300">
-                                        <h4 className="text-white text-xl font-bold">{product.name}</h4>
-                                        <p className="text-white text-sm">Click to view menu & buy</p>
-                                    </div>
+                                <motion.div className="menu-img relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition duration-300 w-full max-w-sm mx-auto md:w-[320px] md:h-[200px]" whileHover={{ scale: 1.03 }}>
+                                    <img src={product.image} loading="lazy" alt={product.name} className="w-full h-48 md:h-full object-cover transition duration-500 hover:scale-110" />
+                                        <div className="overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300">
+                                            <h4 className="text-white text-xl font-bold">{product.name}</h4>
+                                            <p className="text-white text-sm">Click to view menu & buy</p>
+                                            <Link to="/menu.html" className="mt-3 px-4 py-2 bg-[#ff9800] text-white rounded-full font-bold shadow md:inline-block block">
+                                                Show All
+                                            </Link>
+                                            <Link to="/menu.html" className="absolute bottom-3 right-3 bg-[#ff9800] text-white rounded-full px-3 py-2 font-bold shadow md:hidden">Show All</Link>
+                                        </div>
                                 </motion.div>
                             </Link>
                         </motion.div>
