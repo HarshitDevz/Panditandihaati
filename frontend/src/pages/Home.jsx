@@ -4,6 +4,7 @@ import { useData } from '../context/DataContext';
 import { motion } from 'framer-motion';
 import PremiumHero from '../components/PremiumHero';
 import CategoryFilter from '../components/CategoryFilter';
+import ReviewsCarousel from '../components/ReviewsCarousel';
 
 const heroVariant = {
     hidden: { opacity: 0, y: 12 },
@@ -79,7 +80,7 @@ function Home() {
             <section className="menu text-center">
                 <h2>Our Specialties</h2>
                 <div className="flex items-center justify-center gap-4 mt-4">
-                    <CategoryFilter categories={[]} selected={selectedCategory} onSelect={setSelectedCategory} />
+                    <CategoryFilter categories={[]} selected={selectedCategory} onSelect={setSelectedCategory} showAll={false} />
                 </div>
 
                 <motion.div className="menu-grid flex flex-wrap justify-center items-center gap-6 mt-8" variants={gridContainer} initial="hidden" animate="visible">
@@ -87,14 +88,14 @@ function Home() {
                         <motion.div key={product.id} className="menu-item border-none !m-0 w-full max-w-sm mx-auto" variants={gridItem}>
                             <Link to="/menu.html">
                                 <motion.div className="menu-img relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition duration-300 w-full max-w-sm mx-auto md:w-[320px] md:h-[200px]" whileHover={{ scale: 1.03 }}>
-                                    <img src={product.image} loading="lazy" alt={product.name} className="w-full h-48 md:h-full object-cover transition duration-500 hover:scale-110" />
-                                        <div className="overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition duration-300">
+                                    <img src={product.image} loading="lazy" alt={product.name} className="w-full h-48 md:h-full object-cover transition duration-500 hover:scale-110 relative z-0" />
+                                            <div className="overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center opacity-100 md:opacity-0 md:hover:opacity-100 transition duration-300 z-20">
                                             <h4 className="text-white text-xl font-bold">{product.name}</h4>
                                             <p className="text-white text-sm">Click to view menu & buy</p>
-                                            <Link to="/menu.html" className="mt-3 px-4 py-2 bg-[#ff9800] text-white rounded-full font-bold shadow md:inline-block block">
-                                                Show All
-                                            </Link>
-                                            <Link to="/menu.html" className="absolute bottom-3 right-3 bg-[#ff9800] text-white rounded-full px-3 py-2 font-bold shadow md:hidden">Show All</Link>
+                                                <Link to="/menu.html" className="mt-3 px-4 py-2 bg-[#ff9800] text-white rounded-full font-bold shadow hidden md:inline-block z-30">
+                                                    Show All
+                                                </Link>
+                                                <Link to="/menu.html" className="absolute bottom-3 right-3 bg-[#ff9800] text-white rounded-full px-3 py-2 font-bold shadow md:hidden z-30">Show All</Link>
                                         </div>
                                 </motion.div>
                             </Link>
@@ -130,39 +131,13 @@ function Home() {
                     <p>Real words from people!</p>
                 </div>
 
-                <motion.div className="reviews-grid" variants={gridContainer} initial="hidden" animate="visible">
-                    {/* Card 1 */}
-                    <motion.article className="review-card" variants={fadeInUp}>
-                        <img className="avatar" src="images/1.avif" alt="Photo of Ramesh" />
-                        <h3 className="name">Ramesh</h3>
-                        <div className="stars" aria-label="5 out of 5 stars">★★★★★</div>
-                        <p className="review">“Best besan barfi I’ve ever had! Must try!”</p>
-                    </motion.article>
-
-                    {/* Card 2 */}
-                    <motion.article className="review-card" variants={fadeInUp}>
-                        <img className="avatar" src="images/3.png" alt="Photo of Priya" />
-                        <h3 className="name">Priya</h3>
-                        <div className="stars" aria-label="5 out of 5 stars">★★★★</div>
-                        <p className="review">“Pure, tasty local Himachali flavors – I love it!”</p>
-                    </motion.article>
-
-                    {/* Card 3 */}
-                    <motion.article className="review-card" variants={fadeInUp}>
-                        <img className="avatar" src="images/2.png" alt="Photo of Yuvraj" />
-                        <h3 className="name">Yuvraj</h3>
-                        <div className="stars" aria-label="5 out of 5 stars">★★★★★</div>
-                        <p className="review">“Whenever I visit Hamirpur, I never miss it!”</p>
-                    </motion.article>
-
-                    {/* Card 4 */}
-                    <motion.article className="review-card" variants={fadeInUp}>
-                        <img className="avatar" src="images/4.png" alt="Photo of Sonya Moroz" />
-                        <h3 className="name">Anka</h3>
-                        <div className="stars" aria-label="5 out of 5 stars">★★★★★</div>
-                        <p className="review">“Best traditional Himachali sweets particularly beasn ke barfi ,Service is excellent and very well behaved shop owner and staff !! Must try Beasan Ke Barfi !!”</p>
-                    </motion.article>
-                </motion.div>
+                {/* Carousel */}
+                <ReviewsCarousel items={[
+                    { id: 1, name: 'Ramesh', rating: 5, image: 'images/1.avif', text: 'Best besan barfi I’ve ever had! Must try!' },
+                    { id: 2, name: 'Priya', rating: 4, image: 'images/3.png', text: 'Pure, tasty local Himachali flavors – I love it!' },
+                    { id: 3, name: 'Yuvraj', rating: 5, image: 'images/2.png', text: 'Whenever I visit Hamirpur, I never miss it!' },
+                    { id: 4, name: 'Anka', rating: 5, image: 'images/4.png', text: 'Best traditional Himachali sweets particularly beasn ke barfi ,Service is excellent and very well behaved shop owner and staff !! Must try Beasan Ke Barfi !!' }
+                ]} />
 
                 <div className="reviews-cta">
                     <Link className="cta-btn" to="#">📝 Write a Review</Link>

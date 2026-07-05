@@ -15,6 +15,8 @@ const Home = React.lazy(() => import('./pages/Home'));
 const Menu = React.lazy(() => import('./pages/Menu'));
 const About = React.lazy(() => import('./pages/About'));
 const Contact = React.lazy(() => import('./pages/Contact'));
+const Privacy = React.lazy(() => import('./pages/Privacy'));
+const Terms = React.lazy(() => import('./pages/Terms'));
 const Login = React.lazy(() => import('./pages/Login'));
 const Signup = React.lazy(() => import('./pages/Signup'));
 const ForgetPassword = React.lazy(() => import('./pages/ForgetPassword'));
@@ -77,6 +79,8 @@ function AnimatedRoutes() {
         <Route path="/menu.html" element={<Menu />} />
         <Route path="/about.html" element={<About />} />
         <Route path="/contact.html" element={<Contact />} />
+        <Route path="/privacy.html" element={<Privacy />} />
+        <Route path="/terms.html" element={<Terms />} />
         <Route path="/login.html" element={<Login />} />
         <Route path="/signup.html" element={<Signup />} />
         <Route path="/forget.html" element={<ForgetPassword />} />

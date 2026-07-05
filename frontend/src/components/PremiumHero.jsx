@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useData } from '../context/DataContext';
 
 const container = {
   hidden: {},
@@ -14,6 +15,13 @@ const line = {
 
 export default function PremiumHero({ title = 'Panditan Di Hatti', subtitle, ctaText = 'Order Now' }) {
   const ref = useRef(null);
+  const { businessInfo } = useData();
+  const [now, setNow] = useState(new Date());
+
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(id);
+  }, []);
   const { scrollY } = useScroll({ target: ref });
   const bgScale = useTransform(scrollY, [0, 400], [1.05, 1]);
   const bgY = useTransform(scrollY, [0, 400], [0, -40]);
@@ -61,8 +69,43 @@ export default function PremiumHero({ title = 'Panditan Di Hatti', subtitle, cta
               {ctaText}
             </motion.button>
           </Link>
+          {/* Open/Closed badge */}
+          <div className="ml-4 flex items-center gap-3">
+            <div className="text-sm text-gray-600">{now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+            <div className={`px-3 py-1 rounded-full text-sm font-semibold ${isOpenHero(businessInfo, now) ? 'bg-emerald-500 text-white' : 'bg-red-600 text-white'}`}>
+              {isOpenHero(businessInfo, now) ? 'Open' : 'Closed'}
+            </div>
+          </div>
         </motion.div>
       </motion.div>
     </motion.header>
   );
+}
+
+function isOpenHero(businessInfo, now) {
+  const hours = businessInfo?.openingHours;
+  if (!hours) return false;
+  const todayName = now.toLocaleDateString('en-US', { weekday: 'long' });
+  const times = hours[todayName];
+  if (!times) return false;
+  if (/closed/i.test(times)) return false;
+  const m = times.split(/[-–—]/).map(s => s.trim());
+  if (m.length < 2) return false;
+  const parse = (p) => {
+    const mm = p.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+    if (!mm) return null;
+    let hh = parseInt(mm[1], 10);
+    const min = parseInt(mm[2], 10);
+    const ap = mm[3].toUpperCase();
+    if (ap === 'PM' && hh !== 12) hh += 12;
+    if (ap === 'AM' && hh === 12) hh = 0;
+    const d = new Date(now);
+    d.setHours(hh, min, 0, 0);
+    return d;
+  };
+  let start = parse(m[0]);
+  let end = parse(m[1]);
+  if (!start || !end) return false;
+  if (end <= start) end.setDate(end.getDate() + 1);
+  return now >= start && now <= end;
 }

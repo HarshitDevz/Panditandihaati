@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-export default function CategoryFilter({ categories = [], selected = 'All', onSelect }) {
+export default function CategoryFilter({ categories = [], selected = 'All', onSelect, showAll = true }) {
+  const items = showAll ? ['All', ...categories] : [...categories];
+
   return (
     <div className="w-full flex justify-center my-6">
       <div className="inline-flex gap-3 flex-wrap">
-        {['All', ...categories].map((cat) => (
+        {items.map((cat) => (
           <motion.button
             key={cat}
             onClick={() => onSelect(cat)}

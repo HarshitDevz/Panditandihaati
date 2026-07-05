@@ -1,4 +1,5 @@
 import { useData } from '../context/DataContext';
+import { Link } from 'react-router-dom';
 
 function Footer() {
     const { businessInfo } = useData() || {};
@@ -32,16 +33,16 @@ function Footer() {
                     </div>
 
                     <div className="flex items-center gap-4 mt-4 text-sm">
-                        <a href="#" className="text-gray-300 hover:text-white">Privacy</a>
+                        <Link to="/privacy.html" className="text-gray-300 hover:text-white">Privacy</Link>
                         <span className="text-gray-600">•</span>
-                        <a href="#" className="text-gray-300 hover:text-white">Terms</a>
+                        <Link to="/terms.html" className="text-gray-300 hover:text-white">Terms</Link>
                         <span className="text-gray-600">•</span>
-                        <a href="#" className="text-gray-300 hover:text-white">Contact</a>
+                        <Link to="/contact.html" className="text-gray-300 hover:text-white">Contact</Link>
                     </div>
                 </div>
 
                 {/* Middle: Opening hours */}
-                <div>
+                <div className="order-3 md:order-2">
                     <h4 className="text-lg font-bold text-gray-100 mb-3">Opening Hours</h4>
                     <div className="grid grid-cols-1 gap-2 text-sm text-gray-300">
                         {Object.entries(hours).map(([day, time]) => {
@@ -102,7 +103,7 @@ function Footer() {
                 </div>
 
                 {/* Right: Map */}
-                <div>
+                <div className="order-2 md:order-3">
                     <h4 className="text-lg font-bold text-gray-100 mb-3">Visit Us</h4>
                     <div className="w-full h-40 rounded overflow-hidden border border-gray-800 shadow-sm">
                         <iframe
@@ -117,9 +118,9 @@ function Footer() {
             </div>
 
             <div className="bg-[#0b1220] border-t border-gray-900">
-                <div className="max-w-7xl mx-auto px-6 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400">
-                    <div>© {new Date().getFullYear()} Panditan Di Hatti</div>
-                    <div className="mt-2 md:mt-0">Website designed by Harshit — Licensed under MIT</div>
+                <div className="max-w-7xl mx-auto px-6 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400 gap-3">
+                    <div className="w-full md:w-auto text-center md:text-left">© {new Date().getFullYear()} Panditan Di Hatti</div>
+                    <div className="w-full md:w-auto text-center md:text-right">Website designed by Harshit — Licensed under MIT</div>
                 </div>
             </div>
         </footer>
