@@ -58,7 +58,7 @@ function Home() {
                 ctaText="View Menu"
                 eyebrow="Established 1980"
                 highlights={['Premium sweets', 'Fresh preparation', 'Trusted locally']}
-                image="/images/SHOP.avif"
+                image="/images/shop.png"
                 accentImage="/images/BESAN BARFI.png"
             />
 

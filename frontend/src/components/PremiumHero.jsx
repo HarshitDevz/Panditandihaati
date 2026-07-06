@@ -19,7 +19,7 @@ export default function PremiumHero({
   ctaText = 'Order Now',
   eyebrow = 'Established 1980',
   highlights = ['Premium sweets', 'Fresh preparation', 'Trusted locally'],
-  image = '/images/SHOP.avif',
+  image = '/images/shop.png',
   accentImage = '/images/BESAN BARFI.png'
 }) {
   const ref = useRef(null);
@@ -99,7 +99,7 @@ export default function PremiumHero({
                 width={600}
                 height={460}
                 fetchPriority="high"
-                className="relative h-[240px] w-full rounded-[1.6rem] object-cover sm:h-[320px] md:h-[460px]"
+                className="relative w-full rounded-[1.6rem] object-contain object-center"
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
               />

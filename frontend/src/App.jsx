@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { useData } from './context/DataContext';
@@ -27,6 +27,7 @@ function App() {
     <DataProvider>
       <CartProvider>
         <Router>
+          <ScrollToTop />
           <Navbar />
           <CartDrawer />
           <Suspense fallback={<div style={{ padding: '50px', textAlign: 'center' }} aria-live="polite">Loading...</div>}>
@@ -43,6 +44,12 @@ function App() {
 }
 
 export default App;
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
 
 function AnimatedRoutes() {
   const location = useLocation();

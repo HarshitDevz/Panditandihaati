@@ -20,7 +20,7 @@ function About() {
                     well-regarded for its fresh and flavorful treats. Visitors often praise the excellent service and the quality of
                     the sweets, making it a must-visit for those looking to indulge in authentic sweets.
                 </p>
-                <img src="images/shop.jpg" loading="lazy" alt="Panditan Di Hatti shop front in Hamirpur" width={1000} height={600} className="shop-img w-full max-w-full" />
+                <img src="images/shop.png" loading="lazy" alt="Panditan Di Hatti shop front in Hamirpur" width={1000} height={600} className="shop-img w-full max-w-full" />
             </section>
         </>
     );
