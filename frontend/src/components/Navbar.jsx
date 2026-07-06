@@ -3,7 +3,7 @@ import { ShoppingCart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useData } from '../context/DataContext';
 import OfferTicker from './OfferTicker';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function Navbar() {
     const location = useLocation();
@@ -46,6 +46,30 @@ function Navbar() {
     };
 
     const isAuthPage = ['/signup', '/login', '/forget', '/reset-password'].includes(location.pathname);
+
+    const navLinks = isAuthPage
+        ? [{ to: '/home', label: 'Home' }]
+        : [
+            { to: '/home', label: 'Home' },
+            { to: '/menu', label: 'Menu' },
+            { to: '/about', label: 'About' },
+            { to: '/contact', label: 'Contact' },
+          ];
+
+    const activeIndex = navLinks.findIndex(l =>
+        location.pathname === l.to || (location.pathname === '/' && l.to === '/home')
+    );
+    const sliderRef = useRef(null);
+    const listRef = useRef(null);
+
+    useEffect(() => {
+        if (!listRef.current || activeIndex < 0) return;
+        const items = listRef.current.querySelectorAll('li');
+        const active = items[activeIndex];
+        if (!active || !sliderRef.current) return;
+        sliderRef.current.style.width = active.offsetWidth + 'px';
+        sliderRef.current.style.left = active.offsetLeft + 'px';
+    }, [activeIndex, location.pathname]);
 
     const closeMenu = () => {
         const cb = document.getElementById('menu-toggle');
@@ -100,15 +124,11 @@ function Navbar() {
                 <span></span>
             </label>
 
-            <ul className="nav-left flex-1">
-                <li><Link to="/home" className={isActive('/home')} onClick={closeMenu}>Home</Link></li>
-                {!isAuthPage && (
-                    <>
-                        <li><Link to="/menu" className={isActive('/menu')} onClick={closeMenu}>Menu</Link></li>
-                        <li><Link to="/about" className={isActive('/about')} onClick={closeMenu}>About</Link></li>
-                        <li><Link to="/contact" className={isActive('/contact')} onClick={closeMenu}>Contact</Link></li>
-                    </>
-                )}
+            <ul className="nav-left flex-1" ref={listRef} style={{ position: 'relative' }}>
+                <li style={{ position: 'absolute', bottom: 0, height: '3px', background: 'var(--accent)', borderRadius: '2px', transition: 'left 0.3s ease, width 0.3s ease', pointerEvents: 'none' }} ref={sliderRef} />
+                {navLinks.map(l => (
+                    <li key={l.to}><Link to={l.to} className={isActive(l.to)} onClick={closeMenu} style={{ display: 'inline-block', width: '90px', textAlign: 'center' }}>{l.label}</Link></li>
+                ))}
             </ul>
 
             <div className="flex items-center gap-4 ml-auto">

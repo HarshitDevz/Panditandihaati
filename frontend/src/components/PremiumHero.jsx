@@ -37,7 +37,7 @@ export default function PremiumHero({
   const words = String(title).split(' ');
 
   return (
-    <motion.header ref={ref} className="hero relative overflow-hidden bg-gradient-to-br from-[#fffaf3] via-[#fff7ef] to-[#fffdf9] px-4 py-8 md:px-10 md:py-20">
+    <motion.header ref={ref} className="hero relative overflow-hidden bg-gradient-to-br from-[#fffaf3] via-[#fff7ef] to-[#fffdf9] px-4 py-8 md:px-10 md:py-20" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
       <motion.div style={{ scale: bgScale, y: bgY }} className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-20 -left-16 h-64 w-64 rounded-full bg-[#d9a15f]/18 blur-3xl" />
         <div className="absolute right-0 top-12 h-72 w-72 rounded-full bg-[#e6c18f]/22 blur-3xl" />

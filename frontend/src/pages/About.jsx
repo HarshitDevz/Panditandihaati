@@ -1,9 +1,14 @@
 import React from 'react';
+import '../styles/about-hero.css';
 
 function About() {
     return (
         <>
-            <section className="about" aria-labelledby="about-heading">
+            <div className="about-sticky-hero" aria-hidden="true">
+                <h1>Our Story</h1>
+                <p>Traditional sweets, presented with care</p>
+            </div>
+            <section className="about about-scroll-content" aria-labelledby="about-heading">
                 <h1 id="about-heading" style={{fontFamily: "'Playfair Display', serif", color: 'var(--accent-dark)', fontSize: 'clamp(2rem, 3vw, 3rem)', fontWeight: 800, lineHeight: 1.05, margin: 0}}>Our Story</h1>
                 <p>
                     Since 1980, Panditan Di Hatti has been a beloved name in Hamirpur (Anu), Himachal Pradesh.
