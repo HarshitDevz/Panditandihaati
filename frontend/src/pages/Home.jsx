@@ -62,8 +62,15 @@ function Home() {
                 accentImage="/images/BESAN BARFI.png"
             />
 
-            {/* About Section */}
-            <motion.section className="about" variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.22 }}>
+            {/* About Section - slides up over hero like a card */}
+            <section className="about" style={{
+                position: 'relative',
+                zIndex: 10,
+                marginTop: '-40px',
+                borderRadius: '32px 32px 0 0',
+                background: '#fffdf8',
+                boxShadow: '0 -8px 40px rgba(0,0,0,0.10)',
+            }}>
                 <div className="section-shell about-shell">
                     <div className="section-copy">
                         <p className="section-kicker">Our Story</p>
@@ -79,7 +86,7 @@ function Home() {
                         <img src="images/OWNER.png" loading="lazy" alt="Owner of Panditan Di Hatti" width={440} height={440} />
                     </div>
                 </div>
-            </motion.section>
+            </section>
 
             {/* Menu Section */}
             <motion.section className="menu text-center" variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.22 }}>

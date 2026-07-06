@@ -8,11 +8,9 @@ import { useState, useEffect } from 'react';
 function Navbar() {
     const location = useLocation();
     const { setIsCartOpen, cartCount } = useCart();
-
-    // Hide main site navbar on admin routes
     const { businessInfo } = useData();
+    const [scrolled, setScrolled] = useState(false);
 
-    // Dismissal applies only to mobile; allow desktop/tablet to always see the strip
     const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 768 : false);
     const [welcomeDismissedMobile, setWelcomeDismissedMobile] = useState(() => {
         try {
@@ -29,14 +27,17 @@ function Navbar() {
     }, []);
 
     useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 40);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
+    useEffect(() => {
         try {
             localStorage.setItem('pdh_welcome_dismissed_mobile', welcomeDismissedMobile ? '1' : '0');
-        } catch (e) {
-            // ignore
-        }
+        } catch (e) {}
     }, [welcomeDismissedMobile]);
 
-    // Hide main site navbar on admin routes or when maintenance mode is active
     if (location.pathname && location.pathname.startsWith('/admin')) return null;
     if (businessInfo && businessInfo.maintenance) return null;
 
@@ -52,29 +53,46 @@ function Navbar() {
     };
 
     return (
-        <>
-        {/* Top welcome strip */}
+        <div
+            style={{
+                position: 'sticky',
+                top: 0,
+                zIndex: 200,
+                transition: 'transform 0.35s ease, box-shadow 0.35s ease',
+                transform: scrolled ? 'translateY(0)' : 'translateY(0)',
+            }}
+        >
+        {/* Top info strip — slides up and hides on scroll */}
             {businessInfo && !(isMobile && welcomeDismissedMobile) && (
-                <div className="hidden md:flex items-center justify-center relative bg-black text-white py-2 text-sm font-medium px-6">
-                        <span className="absolute left-6 text-xs text-gray-400 font-medium tracking-wide">📞 {businessInfo?.phone || '98166-51543'}</span>
-                        <div className="mx-2 text-center" style={{ fontFamily: "'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial" }}>
-                            <span className="inline-flex items-center gap-3">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden focusable="false">
-                                    <path fill="currentColor" d="M12.7 2.3c.6.6.6 1.6 0 2.2L9.6 7.6l.7.7c1.1 1.1 1.1 2.9 0 4l-2.2 2.2c-.8.8-2.1.8-2.9 0-.8-.8-.8-2.1 0-2.9l2.2-2.2c.6-.6 1-1.5 1-2.4 0-.9-.4-1.8-1-2.4L4.9 3.6C4.3 3 4.3 2 4.9 1.4c.6-.6 1.6-.6 2.2 0l2.8 2.8c.8.8 2 .8 2.8 0l.2-.2z" />
-                                    <path fill="currentColor" d="M21.1 10.3c-.6-.6-1.6-.6-2.2 0l-2.8 2.8c-.8.8-2 .8-2.8 0l-.2-.2c-.6-.6-.6-1.6 0-2.2l3.9-3.9c.6-.6.6-1.6 0-2.2-.6-.6-1.6-.6-2.2 0l-3 3c-.8.8-2 .8-2.8 0L8.4 6.1c-.6-.6-1.6-.6-2.2 0-.6.6-.6 1.6 0 2.2l5.9 5.9c1.6 1.6 4.2 1.6 5.8 0l3.2-3.2c.6-.6.6-1.6 0-2.2z" />
-                                </svg>
-                                <span className="font-medium">{businessInfo.welcomeText || (`Welcome to ${businessInfo.name || 'Panditan Di Hatti'} — Fresh sweets made with love!`)}</span>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden focusable="false" style={{ transform: 'scaleX(-1)' }}>
-                                    <path fill="currentColor" d="M12.7 2.3c.6.6.6 1.6 0 2.2L9.6 7.6l.7.7c1.1 1.1 1.1 2.9 0 4l-2.2 2.2c-.8.8-2.1.8-2.9 0-.8-.8-.8-2.1 0-2.9l2.2-2.2c.6-.6 1-1.5 1-2.4 0-.9-.4-1.8-1-2.4L4.9 3.6C4.3 3 4.3 2 4.9 1.4c.6-.6 1.6-.6 2.2 0l2.8 2.8c.8.8 2 .8 2.8 0l.2-.2z" />
-                                    <path fill="currentColor" d="M21.1 10.3c-.6-.6-1.6-.6-2.2 0l-2.8 2.8c-.8.8-2 .8-2.8 0l-.2-.2c-.6-.6-.6-1.6 0-2.2l3.9-3.9c.6-.6.6-1.6 0-2.2-.6-.6-1.6-.6-2.2 0l-3 3c-.8.8-2 .8-2.8 0L8.4 6.1c-.6-.6-1.6-.6-2.2 0-.6.6-.6 1.6 0 2.2l5.9 5.9c1.6 1.6 4.2 1.6 5.8 0l3.2-3.2c.6-.6.6-1.6 0-2.2z" />
-                                </svg>
-                            </span>
-                        </div>
-                        <span className="absolute right-6 text-xs text-gray-400 font-medium tracking-wide">GSTIN: 02AMWPS9440GIZK</span>
+                <div
+                    className="hidden md:flex items-center justify-center relative bg-black text-white text-sm font-medium px-6 overflow-hidden"
+                    style={{
+                        maxHeight: scrolled ? 0 : '40px',
+                        paddingTop: scrolled ? 0 : '8px',
+                        paddingBottom: scrolled ? 0 : '8px',
+                        opacity: scrolled ? 0 : 1,
+                        transition: 'max-height 0.35s ease, padding 0.35s ease, opacity 0.25s ease',
+                    }}
+                >
+                    <span className="absolute left-6 text-xs text-gray-400 font-medium tracking-wide">📞 {businessInfo?.phone || '98166-51543'}</span>
+                    <div className="mx-2 text-center" style={{ fontFamily: "'Poppins', system-ui, sans-serif" }}>
+                        <span className="inline-flex items-center gap-3">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden focusable="false">
+                                <path fill="currentColor" d="M12.7 2.3c.6.6.6 1.6 0 2.2L9.6 7.6l.7.7c1.1 1.1 1.1 2.9 0 4l-2.2 2.2c-.8.8-2.1.8-2.9 0-.8-.8-.8-2.1 0-2.9l2.2-2.2c.6-.6 1-1.5 1-2.4 0-.9-.4-1.8-1-2.4L4.9 3.6C4.3 3 4.3 2 4.9 1.4c.6-.6 1.6-.6 2.2 0l2.8 2.8c.8.8 2 .8 2.8 0l.2-.2z" />
+                                <path fill="currentColor" d="M21.1 10.3c-.6-.6-1.6-.6-2.2 0l-2.8 2.8c-.8.8-2 .8-2.8 0l-.2-.2c-.6-.6-.6-1.6 0-2.2l3.9-3.9c.6-.6.6-1.6 0-2.2-.6-.6-1.6-.6-2.2 0l-3 3c-.8.8-2 .8-2.8 0L8.4 6.1c-.6-.6-1.6-.6-2.2 0-.6.6-.6 1.6 0 2.2l5.9 5.9c1.6 1.6 4.2 1.6 5.8 0l3.2-3.2c.6-.6.6-1.6 0-2.2z" />
+                            </svg>
+                            <span className="font-medium">{businessInfo.welcomeText || `Welcome to ${businessInfo.name || 'Panditan Di Hatti'} — Fresh sweets made with love!`}</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden focusable="false" style={{ transform: 'scaleX(-1)' }}>
+                                <path fill="currentColor" d="M12.7 2.3c.6.6.6 1.6 0 2.2L9.6 7.6l.7.7c1.1 1.1 1.1 2.9 0 4l-2.2 2.2c-.8.8-2.1.8-2.9 0-.8-.8-.8-2.1 0-2.9l2.2-2.2c.6-.6 1-1.5 1-2.4 0-.9-.4-1.8-1-2.4L4.9 3.6C4.3 3 4.3 2 4.9 1.4c.6-.6 1.6-.6 2.2 0l2.8 2.8c.8.8 2 .8 2.8 0l.2-.2z" />
+                                <path fill="currentColor" d="M21.1 10.3c-.6-.6-1.6-.6-2.2 0l-2.8 2.8c-.8.8-2 .8-2.8 0l-.2-.2c-.6-.6-.6-1.6 0-2.2l3.9-3.9c.6-.6.6-1.6 0-2.2-.6-.6-1.6-.6-2.2 0l-3 3c-.8.8-2 .8-2.8 0L8.4 6.1c-.6-.6-1.6-.6-2.2 0-.6.6-.6 1.6 0 2.2l5.9 5.9c1.6 1.6 4.2 1.6 5.8 0l3.2-3.2c.6-.6.6-1.6 0-2.2z" />
+                            </svg>
+                        </span>
+                    </div>
+                    <span className="absolute right-6 text-xs text-gray-400 font-medium tracking-wide">GSTIN: 02AMWPS9440GIZK</span>
                 </div>
             )}
+
         <nav aria-label="Main navigation">
-            {/* Hamburger Toggle */}
             <input type="checkbox" id="menu-toggle" aria-label="Toggle navigation menu" />
             <label htmlFor="menu-toggle" className="hamburger" aria-label="Open menu">
                 <span></span>
@@ -82,8 +100,7 @@ function Navbar() {
                 <span></span>
             </label>
 
-            {/* Left Menu */}
-                <ul className="nav-left flex-1">
+            <ul className="nav-left flex-1">
                 <li><Link to="/home" className={isActive('/home')} onClick={closeMenu}>Home</Link></li>
                 {!isAuthPage && (
                     <>
@@ -94,15 +111,10 @@ function Navbar() {
                 )}
             </ul>
 
-            {/* Right Menu & Cart */}
             <div className="flex items-center gap-4 ml-auto">
-                {/* Live Clock & Open/Closed badge */}
                 <div className="hidden md:flex items-center gap-3 mr-2">
                     <ClockAndStatus businessInfo={businessInfo} />
                 </div>
-                {/* Right-side actions (cart etc.) — no admin link */}
-
-                {/* Cart Icon */}
                 <button
                     onClick={() => setIsCartOpen(true)}
                     className="relative text-white hover:text-orange-200 transition p-1 mr-2"
@@ -117,7 +129,7 @@ function Navbar() {
             </div>
         </nav>
         <OfferTicker />
-        </>
+        </div>
     );
 }
 
