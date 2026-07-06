@@ -70,8 +70,8 @@ function Home() {
                 </div>
 
                 {/* Card 1 — About: slides over Hero */}
-                <section className="about" style={{ position: 'relative', zIndex: 2, borderRadius: '32px 32px 0 0', background: '#fffdf8', boxShadow: '0 -16px 60px rgba(0,0,0,0.12)', width: '100vw', minHeight: '100vh', padding: '48px 14px', maxWidth: '100vw', margin: 0, display: 'flex', alignItems: 'center' }}>
-                    <div className="section-shell about-shell" style={{ maxWidth: 1120, margin: '0 auto' }}>
+                <section className="about" style={{ position: 'relative', zIndex: 2, borderRadius: '32px 32px 0 0', background: '#fffdf8', boxShadow: '0 -16px 60px rgba(0,0,0,0.12)', width: '100%', minHeight: '100vh', padding: 'clamp(32px, 6vw, 64px) clamp(16px, 4vw, 48px)', maxWidth: '100%', margin: 0, display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
+                    <div className="section-shell about-shell" style={{ maxWidth: 1120, margin: '0 auto', width: '100%' }}>
                         <div className="section-copy">
                             <p className="section-kicker">Our Story</p>
                             <h2>Traditional sweets, presented with care</h2>
@@ -90,8 +90,8 @@ function Home() {
             </div>
 
             {/* Card 2 — Menu */}
-            <section className="menu text-center" style={{ background: '#fff8f0', width: '100vw', minHeight: '100vh', padding: '48px 14px', maxWidth: '100vw', margin: 0, display: 'flex', alignItems: 'center' }}>
-                <div className="section-shell menu-shell" style={{ maxWidth: 1120, margin: '0 auto' }}>
+            <section className="menu text-center" style={{ background: '#fff8f0', width: '100%', minHeight: '100vh', padding: 'clamp(32px, 6vw, 64px) clamp(16px, 4vw, 48px)', maxWidth: '100%', margin: 0, display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
+                <div className="section-shell menu-shell" style={{ maxWidth: 1120, margin: '0 auto', width: '100%' }}>
                     <div className="section-copy text-center">
                         <p className="section-kicker">Signature Picks</p>
                         <h2>Signature picks from the counter</h2>
@@ -118,8 +118,8 @@ function Home() {
             </section>
 
             {/* Card 3 — PM Modi */}
-            <section className="modi-promo" style={{ background: '#fffdf8', width: '100vw', minHeight: '100vh', padding: '48px 14px', maxWidth: '100vw', margin: 0, display: 'flex', alignItems: 'center' }}>
-                <div className="section-shell flex flex-col items-center gap-6" style={{ maxWidth: 1120, margin: '0 auto' }}>
+            <section className="modi-promo" style={{ background: '#fffdf8', width: '100%', minHeight: '100vh', padding: 'clamp(32px, 6vw, 64px) clamp(16px, 4vw, 48px)', maxWidth: '100%', margin: 0, display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
+                <div className="section-shell flex flex-col items-center gap-6" style={{ maxWidth: 1120, margin: '0 auto', width: '100%' }}>
                     <div className="modi-text text-center">
                         <p className="section-kicker">Featured Mention</p>
                         <h2>PM Modi Ji Featured Us !!</h2>
@@ -141,8 +141,8 @@ function Home() {
             </section>
 
             {/* Card 4 — Reviews */}
-            <section className="reviews-section" id="customer-reviews" style={{ background: '#fff8f0', width: '100vw', minHeight: '100vh', padding: '48px 14px', maxWidth: '100vw', margin: 0, display: 'flex', alignItems: 'center' }}>
-                <div className="section-shell reviews-shell" style={{ maxWidth: 1120, margin: '0 auto' }}>
+            <section className="reviews-section" id="customer-reviews" style={{ background: '#fff8f0', width: '100%', minHeight: '100vh', padding: 'clamp(32px, 6vw, 64px) clamp(16px, 4vw, 48px)', maxWidth: '100%', margin: 0, display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
+                <div className="section-shell reviews-shell" style={{ maxWidth: 1120, margin: '0 auto', width: '100%' }}>
                     <div className="reviews-header">
                         <p className="section-kicker">Social proof</p>
                         <h2>Customer Reviews</h2>

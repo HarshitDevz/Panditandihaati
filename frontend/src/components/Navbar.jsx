@@ -71,10 +71,9 @@ function Navbar() {
         sliderRef.current.style.left = active.offsetLeft + 'px';
     }, [activeIndex, location.pathname]);
 
-    const closeMenu = () => {
-        const cb = document.getElementById('menu-toggle');
-        if (cb) cb.checked = false;
-    };
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const closeMenu = () => setMenuOpen(false);
 
     return (
         <div
@@ -82,8 +81,8 @@ function Navbar() {
                 position: 'sticky',
                 top: 0,
                 zIndex: 200,
-                transition: 'transform 0.35s ease, box-shadow 0.35s ease',
-                transform: scrolled ? 'translateY(0)' : 'translateY(0)',
+                height: 'auto',
+                lineHeight: 'normal',
             }}
         >
         {/* Top info strip — slides up and hides on scroll */}
@@ -117,13 +116,7 @@ function Navbar() {
             )}
 
         <nav aria-label="Main navigation">
-            <input type="checkbox" id="menu-toggle" aria-label="Toggle navigation menu" />
-            <label htmlFor="menu-toggle" className="hamburger" aria-label="Open menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-
+            {/* Desktop nav links only */}
             <ul className="nav-left flex-1" ref={listRef} style={{ position: 'relative' }}>
                 <li style={{ position: 'absolute', bottom: 0, height: '3px', background: 'var(--accent)', borderRadius: '2px', transition: 'left 0.3s ease, width 0.3s ease', pointerEvents: 'none' }} ref={sliderRef} />
                 {navLinks.map(l => (
@@ -131,21 +124,29 @@ function Navbar() {
                 ))}
             </ul>
 
-            <div className="flex items-center gap-4 ml-auto">
-                <div className="hidden md:flex items-center gap-3 mr-2">
+            <div className="flex items-center gap-3 ml-auto" style={{ position: 'relative' }}>
+                <div className="hidden md:flex items-center gap-3">
                     <ClockAndStatus businessInfo={businessInfo} />
                 </div>
-                <button
-                    onClick={() => setIsCartOpen(true)}
-                    className="relative text-white hover:text-orange-200 transition p-1 mr-2"
-                >
+                {/* Cart */}
+                <button onClick={() => setIsCartOpen(true)} className="relative text-white hover:text-orange-200 transition p-1">
                     <ShoppingCart size={24} />
                     {cartCount > 0 && (
-                        <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
-                            {cartCount}
-                        </span>
+                        <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">{cartCount}</span>
                     )}
                 </button>
+                {/* Hamburger — mobile only, RIGHT of cart */}
+                <button className="hamburger" aria-label="Open menu" onClick={() => setMenuOpen(o => !o)}>
+                    <span></span><span></span><span></span>
+                </button>
+                {/* Mobile dropdown */}
+                {menuOpen && (
+                    <ul style={{ position: 'absolute', top: '110%', right: 0, width: '160px', background: 'var(--nav-bg)', borderRadius: '0 0 12px 12px', boxShadow: '0 8px 24px rgba(0,0,0,0.18)', padding: '8px', zIndex: 99, display: 'flex', flexDirection: 'column', gap: '4px', listStyle: 'none', margin: 0 }}>
+                        {navLinks.map(l => (
+                            <li key={l.to}><Link to={l.to} className={isActive(l.to)} onClick={closeMenu} style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', color: '#fff', fontWeight: 600, fontSize: '0.95rem', background: 'rgba(255,255,255,0.1)' }}>{l.label}</Link></li>
+                        ))}
+                    </ul>
+                )}
             </div>
         </nav>
         <OfferTicker />
