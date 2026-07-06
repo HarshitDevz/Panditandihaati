@@ -31,7 +31,7 @@ function AdminDashboard() {
     };
 
     // Import JSON backup
-    const importFileRef = React.createRef();
+    const importFileRef = React.useRef(null);
     const handleImportFile = async (e) => {
         const file = e.target.files && e.target.files[0];
         if (!file) return;
@@ -138,7 +138,7 @@ function OverviewManager({ products, announcements }) {
     const stats = [
         { label: 'Total Items', value: products.length, color: 'blue' },
         { label: 'Live on Menu', value: products.filter(p => p.visible).length, color: 'green' },
-        { label: 'Categories', value: 3, color: 'orange' },
+        { label: 'Categories', value: products.reduce((acc, p) => { acc.add(p.category); return acc; }, new Set()).size, color: 'orange' },
         { label: 'Active News', value: announcements.filter(a => a.active).length, color: 'purple' },
     ];
 

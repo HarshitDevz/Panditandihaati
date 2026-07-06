@@ -13,6 +13,11 @@ export default function ReviewsCarousel({ items = [] }) {
     }, [items.length]);
 
     useEffect(() => {
+        const id = setInterval(next, 4000);
+        return () => clearInterval(id);
+    }, [next]);
+
+    useEffect(() => {
         function onKey(e) {
             if (e.key === 'ArrowLeft') prev();
             if (e.key === 'ArrowRight') next();

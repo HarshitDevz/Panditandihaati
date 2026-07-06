@@ -71,10 +71,10 @@ function Navbar() {
                         </div>
                 </div>
             )}
-        <nav>
+        <nav aria-label="Main navigation">
             {/* Hamburger Toggle */}
-            <input type="checkbox" id="menu-toggle" />
-            <label htmlFor="menu-toggle" className="hamburger">
+            <input type="checkbox" id="menu-toggle" aria-label="Toggle navigation menu" />
+            <label htmlFor="menu-toggle" className="hamburger" aria-label="Open menu">
                 <span></span>
                 <span></span>
                 <span></span>

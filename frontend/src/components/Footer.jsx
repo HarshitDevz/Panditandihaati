@@ -6,7 +6,12 @@ function Footer() {
 
     if (businessInfo && businessInfo.maintenance) return null;
 
-    const hours = businessInfo?.openingHours || { Mon: '09:00 - 19:00', Tue: '09:00 - 19:00', Wed: '09:00 - 19:00', Thu: '09:00 - 19:00', Fri: '09:00 - 19:00', Sat: '09:00 - 19:00', Sun: 'Closed' };
+    const hours = businessInfo?.openingHours || { Monday: '09:00 AM - 07:00 PM', Tuesday: '09:00 AM - 07:00 PM', Wednesday: '09:00 AM - 07:00 PM', Thursday: '09:00 AM - 07:00 PM', Friday: '09:00 AM - 07:00 PM', Saturday: '09:00 AM - 07:00 PM', Sunday: 'Closed' };
+
+    // Prevent CLS: render footer skeleton until businessInfo loads
+    if (!businessInfo) return (
+        <footer className="bg-[#0f1720] text-gray-200" style={{ minHeight: 420 }} aria-hidden="true" />
+    );
 
     return (
         <footer className="bg-[#0f1720] text-gray-200">
@@ -14,9 +19,9 @@ function Footer() {
                 {/* Left: Branding & CTA */}
                 <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                        <img src="/images/LOGO.png" alt="Panditan Di Hatti" className="w-14 h-14 object-contain rounded" />
+                        <img src="/images/LOGO.png" alt="Panditan Di Hatti" width={56} height={56} className="w-14 h-14 object-contain rounded" />
                         <div>
-                            <h3 className="text-2xl font-extrabold text-[#b14520]">Panditan Di Hatti</h3>
+                    <h2 className="text-2xl font-extrabold text-[#b14520]">Panditan Di Hatti</h2>
                             <p className="text-sm text-gray-500">Authentic Himachali sweets & snacks</p>
                         </div>
                     </div>
@@ -29,7 +34,7 @@ function Footer() {
                             <span className="font-extrabold text-lg md:text-xl">{businessInfo?.phone || '98166-51543'}</span>
                         </a>
 
-                        <a href={`https://wa.me/${businessInfo?.phone || ''}`} target="_blank" rel="noreferrer" className="text-gray-500 hover:text-gray-700">WhatsApp</a>
+                        <a href={`https://wa.me/${businessInfo?.whatsappNumber || ''}`} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-700">WhatsApp</a>
                     </div>
 
                     <div className="flex items-center gap-4 mt-4 text-sm">
@@ -43,7 +48,7 @@ function Footer() {
 
                 {/* Middle: Opening hours */}
                 <div className="order-3 md:order-2">
-                    <h4 className="text-lg font-bold text-gray-100 mb-3">Opening Hours</h4>
+                    <h3 className="text-lg font-bold text-gray-100 mb-3">Opening Hours</h3>
                     <div className="grid grid-cols-1 gap-2 text-sm text-gray-300">
                         {Object.entries(hours).map(([day, time]) => {
                             const todayName = new Date().toLocaleDateString('en-US', { weekday: 'long' });
@@ -84,10 +89,10 @@ function Footer() {
                             }
 
                             return (
-                                <div key={day} className={`flex items-center justify-between py-2 px-3 rounded-lg ${isToday ? 'bg-white/3 ring-1 ring-white/5' : ''}`}>
-                                    <div className="flex items-center gap-3">
-                                        <span className="w-28 text-sm font-medium text-gray-200">{day}</span>
-                                        <span className="text-sm text-gray-300">{time}</span>
+                                <div key={day} className={`flex items-center justify-between py-2 px-3 rounded-lg gap-2 ${isToday ? 'bg-white/3 ring-1 ring-white/5' : ''}`}>
+                                    <div className="flex items-center gap-2 flex-wrap min-w-0">
+                                        <span className="w-24 text-sm font-medium text-gray-200 flex-shrink-0">{day}</span>
+                                        <span className="text-sm text-gray-300 truncate">{time}</span>
                                     </div>
                                     <div className="ml-2">
                                         {isToday && (
@@ -104,14 +109,15 @@ function Footer() {
 
                 {/* Right: Map */}
                 <div className="order-2 md:order-3">
-                    <h4 className="text-lg font-bold text-gray-100 mb-3">Visit Us</h4>
+                    <h3 className="text-lg font-bold text-gray-100 mb-3">Visit Us</h3>
                     <div className="w-full h-40 rounded overflow-hidden border border-gray-800 shadow-sm">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d848.6498086260543!2d76.51992589999999!3d31.699522208486563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3904d443ecf19601%3A0xffb6a63e8aae8b2f!2sPanditan%20Di%20Hatti!5e0!3m2!1sen!2sin!4v1764696376808!5m2!1sen!2sin"
                             allowFullScreen
                             loading="lazy"
-                            title="Location Map"
+                            title="Panditan Di Hatti location on Google Maps"
                             className="w-full h-full"
+                            referrerPolicy="no-referrer-when-downgrade"
                         />
                     </div>
                 </div>

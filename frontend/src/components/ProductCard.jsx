@@ -20,9 +20,9 @@ function ProductCard({ product, onView }) {
         >
             <div className="menu-img w-full h-40 sm:h-44 md:h-48 lg:h-56 relative overflow-hidden">
                 <img src={product.image} alt={product.name} loading="lazy" className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105" />
-                {hasOffer && (
-                  <div className="absolute top-2 left-2 bg-gradient-to-br from-[#ffb27a] to-[#ff9800] text-white text-xs font-bold px-2 py-1 rounded">10% OFF</div>
-                )}
+                {hasOffer && announcements.filter(a => a.active).map(a => (
+                  <div key={a.id} className="absolute top-2 left-2 bg-gradient-to-br from-[#ffb27a] to-[#ff9800] text-white text-xs font-bold px-2 py-1 rounded">{a.text.length > 20 ? '🔥 Offer' : a.text}</div>
+                ))}
                 <div className="absolute top-2 right-2">
                     <button onClick={(e) => { e.stopPropagation(); onView && onView(product); }} className="bg-white/95 text-gray-800 p-2 rounded-full shadow-sm hover:scale-105 transition">
                         View

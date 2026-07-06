@@ -11,7 +11,7 @@ function AdminLogin() {
     const handleLogin = (e) => {
         e.preventDefault();
         // Default admin password for now
-        if (password === 'Admin@123') {
+        if (password === import.meta.env.VITE_ADMIN_PASSWORD || password === 'Admin@123') {
             localStorage.setItem('pdh_admin_session', 'true');
             navigate('/admin/dashboard');
         } else {

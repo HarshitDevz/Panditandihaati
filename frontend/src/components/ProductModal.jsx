@@ -42,7 +42,7 @@ export default function ProductModal({ product, onClose }) {
   };
 
   return (
-    <motion.div className="fixed inset-0 z-60 flex items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+    <motion.div className="fixed inset-0 z-60 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label={`${product.name} details`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <div className="absolute inset-0 bg-black/50" onClick={onClose}></div>
       <motion.div initial={{ y: 20, scale: 0.98 }} animate={{ y: 0, scale: 1 }} exit={{ y: 10, scale: 0.98 }} className="relative z-10 bg-white rounded-2xl shadow-xl max-w-3xl w-full overflow-hidden">
         <div className="flex flex-col md:flex-row items-start gap-4 p-4">

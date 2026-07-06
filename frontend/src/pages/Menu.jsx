@@ -46,9 +46,9 @@ function Menu() {
                             <p className="text-sm text-gray-600">Discover our specialties and seasonal treats.</p>
                         </div>
 
-                        <div className="flex items-center gap-3 w-full md:w-auto">
-                            <input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search dishes, ingredients..." className="px-3 py-2 rounded-lg border border-gray-200 w-full md:w-64" />
-                            <select value={sort} onChange={e => setSort(e.target.value)} className="px-3 py-2 rounded-lg border border-gray-200">
+                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+                            <input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search dishes..." className="px-3 py-2 rounded-lg border border-gray-200 w-full sm:w-56" />
+                            <select value={sort} onChange={e => setSort(e.target.value)} className="px-3 py-2 rounded-lg border border-gray-200 w-full sm:w-auto">
                                 <option value="recommended">Recommended</option>
                                 <option value="price_low">Price: Low to High</option>
                                 <option value="price_high">Price: High to Low</option>

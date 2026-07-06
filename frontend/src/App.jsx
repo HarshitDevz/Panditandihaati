@@ -29,8 +29,10 @@ function App() {
         <Router>
           <Navbar />
           <CartDrawer />
-          <Suspense fallback={<div style={{ padding: '50px', textAlign: 'center' }}>Loading...</div>}>
-            <AnimatedRoutes />
+          <Suspense fallback={<div style={{ padding: '50px', textAlign: 'center' }} aria-live="polite">Loading...</div>}>
+            <main id="main-content">
+              <AnimatedRoutes />
+            </main>
           </Suspense>
             <SpecialOfferBox />
           <Footer />

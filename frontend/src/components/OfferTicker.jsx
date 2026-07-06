@@ -9,7 +9,7 @@ export default function OfferTicker() {
   return (
     <div className="offer-ticker w-full bg-[#fff7ed] border-t border-b border-[#ffecd1] overflow-hidden">
       <style>{`
-        @keyframes marqueeLR { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        @keyframes marqueeLR { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
         .offer-marquee { display: inline-block; padding-left: 100%; white-space: nowrap; animation: marqueeLR 14s linear infinite; }
         .offer-ticker:hover .offer-marquee { animation-play-state: paused; }
       `}</style>

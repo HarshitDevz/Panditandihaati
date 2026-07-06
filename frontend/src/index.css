@@ -5,12 +5,49 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Skip navigation for accessibility */
+.skip-nav {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: var(--nav-bg);
+  color: #fff;
+  padding: 10px 18px;
+  font-weight: 700;
+  z-index: 9999;
+  border-radius: 0 0 8px 0;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-nav:focus {
+  top: 0;
+}
+
+/* Global focus ring for keyboard accessibility */
+:focus-visible {
+  outline: 3px solid #ff9800;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 body {
   font-family: var(--font-sans);
   font-size: var(--base-font-size);
   margin: 0;
   padding: 0;
-  background: var(--bg);
+  background:
+    radial-gradient(circle at top left, rgba(255, 220, 174, 0.34), transparent 32%),
+    radial-gradient(circle at right 20%, rgba(255, 193, 127, 0.16), transparent 24%),
+    linear-gradient(180deg, #fffdf8 0%, #fff8f0 48%, #fffdfb 100%);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -158,15 +195,204 @@ a.zomato-order {
 }
 
 section {
-  padding: 40px 20px;
-  max-width: 1000px;
+  padding: 32px 14px;
+  max-width: 1120px;
   margin: auto;
 }
 
 section h2 {
   color: var(--accent-dark);
-  font-size: 2em;
+  font-size: clamp(2rem, 3vw, 3rem);
   font-family: 'Playfair Display', serif;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.section-shell {
+  display: grid;
+  gap: 24px;
+  border: 1px solid rgba(164, 97, 22, 0.12);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 24px 70px rgba(79, 48, 15, 0.08);
+  backdrop-filter: blur(14px);
+  padding: 28px;
+}
+
+.section-copy {
+  max-width: 760px;
+}
+
+.section-copy p {
+  margin-top: 14px;
+  margin-bottom: 0;
+  color: #5b4634;
+  line-height: 1.75;
+  font-size: 1.02rem;
+}
+
+.section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  color: #a46116;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+}
+
+.section-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.section-pills span {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(164, 97, 22, 0.14);
+  background: rgba(255, 255, 255, 0.9);
+  color: #61442e;
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(79, 48, 15, 0.05);
+}
+
+.about-shell {
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .about-shell {
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  }
+}
+
+.about-shell .section-media {
+  justify-self: end;
+}
+
+.about-shell img,
+.section-media img {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 22px;
+  box-shadow: 0 18px 40px rgba(79, 48, 15, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  object-fit: cover;
+}
+
+.menu-shell,
+.promo-shell,
+.reviews-shell {
+  position: relative;
+}
+
+.menu-shell::before,
+.promo-shell::before,
+.reviews-shell::before {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  pointer-events: none;
+}
+
+.menu-shell .section-copy,
+.promo-shell .modi-text,
+.reviews-shell .reviews-header {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.menu-shell .section-copy p,
+.promo-shell .modi-text p,
+.reviews-shell .reviews-header p {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.promo-shell {
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .promo-shell {
+    grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+  }
+}
+
+.promo-shell .video-wrapper {
+  max-width: 100%;
+}
+
+.reviews-shell {
+  padding-bottom: 34px;
+}
+
+.reviews-shell .reviews-header h2 {
+  color: #24150f;
+}
+
+.reviews-shell .reviews-header p:last-child {
+  color: #5b4634;
+}
+
+.reviews-shell .reviews-cta {
+  margin-top: 26px;
+}
+
+.about,
+.menu,
+.modi-promo,
+.reviews-section {
+  width: 100%;
+}
+
+.menu .menu-grid {
+  margin-top: 30px;
+}
+
+.menu .menu-item {
+  width: 100%;
+}
+
+.menu .menu-img {
+  width: 100%;
+  max-width: 340px;
+  height: 220px;
+  border-radius: 22px;
+}
+
+.menu .menu-img .overlay {
+  background: linear-gradient(180deg, rgba(36, 21, 15, 0.1), rgba(36, 21, 15, 0.88));
+}
+
+.menu .menu-img:hover .overlay {
+  transform: translateY(0);
+}
+
+.menu .menu-img:hover img {
+  transform: scale(1.08);
+}
+
+.modi-promo,
+.reviews-section {
+  padding-top: 0;
+}
+
+.video-wrapper {
+  border: 1px solid rgba(164, 97, 22, 0.14);
+  background: #fff;
 }
 
 .about img {
@@ -771,7 +997,7 @@ footer,
     width: 75%;
     max-width: 320px;
     height: 100vh;
-    background: transparent !important;
+    background: var(--nav-bg) !important;
     flex-direction: column;
     padding: 80px 20px 30px;
     gap: 0;
@@ -804,9 +1030,9 @@ footer,
     border-radius: 10px;
     margin-bottom: 12px;
     width: 100%;
-    color: var(--accent-dark) !important;
-    background: rgba(255,255,255,0.98) !important;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.14) !important;
+    color: #fff !important;
+    background: rgba(255,255,255,0.15) !important;
+    box-shadow: none !important;
     font-weight: 700;
     font-size: 1.05rem;
     text-decoration: none;
@@ -853,12 +1079,49 @@ footer,
   nav ul.nav-left a:hover,
   nav ul.nav-right a:hover,
   .nav-menu a:hover {
-    background: rgba(255,255,255,1);
+    background: rgba(255,255,255,0.25) !important;
     transform: translateY(-2px);
   }
 
   header.hero h1 {
-    font-size: 2.2em;
+    font-size: 1.8em;
+  }
+
+  section {
+    padding: 24px 12px;
+  }
+
+  .section-shell {
+    padding: 18px 14px;
+  }
+
+  .about-shell .section-media {
+    justify-self: center;
+  }
+
+  .about-shell img,
+  .section-media img {
+    max-width: 100%;
+  }
+
+  .shop-img {
+    width: 100%;
+  }
+
+  .contact iframe {
+    height: 220px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-info,
+  .footer-map,
+  .opening-hours {
+    min-width: unset;
+    width: 100%;
   }
 
   .reviews-grid {
