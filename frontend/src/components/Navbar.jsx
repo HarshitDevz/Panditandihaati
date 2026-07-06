@@ -75,6 +75,19 @@ function Navbar() {
 
     const closeMenu = () => setMenuOpen(false);
 
+    useEffect(() => {
+        if (!menuOpen) return;
+        const handler = (e) => {
+            if (!e.target.closest('nav')) setMenuOpen(false);
+        };
+        document.addEventListener('mousedown', handler);
+        document.addEventListener('touchstart', handler);
+        return () => {
+            document.removeEventListener('mousedown', handler);
+            document.removeEventListener('touchstart', handler);
+        };
+    }, [menuOpen]);
+
     return (
         <div
             style={{
@@ -116,7 +129,19 @@ function Navbar() {
             )}
 
         <nav aria-label="Main navigation">
-            {/* Desktop nav links only */}
+            {/* Hamburger — mobile only, LEFT side */}
+            <button className="hamburger" aria-label="Open menu" onClick={() => setMenuOpen(o => !o)} style={{ position: 'relative' }}>
+                <span></span><span></span><span></span>
+                {menuOpen && (
+                    <ul style={{ position: 'absolute', top: '110%', left: 0, width: '160px', background: 'var(--nav-bg)', borderRadius: '0 0 12px 12px', boxShadow: '0 8px 24px rgba(0,0,0,0.18)', padding: '8px', zIndex: 99, display: 'flex', flexDirection: 'column', gap: '4px', listStyle: 'none', margin: 0 }}>
+                        {navLinks.map(l => (
+                            <li key={l.to}><Link to={l.to} className={isActive(l.to)} onClick={closeMenu} style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', color: '#fff', fontWeight: 600, fontSize: '0.95rem', background: 'rgba(255,255,255,0.1)' }}>{l.label}</Link></li>
+                        ))}
+                    </ul>
+                )}
+            </button>
+
+            {/* Desktop nav links */}
             <ul className="nav-left flex-1" ref={listRef} style={{ position: 'relative' }}>
                 <li style={{ position: 'absolute', bottom: 0, height: '3px', background: 'var(--accent)', borderRadius: '2px', transition: 'left 0.3s ease, width 0.3s ease', pointerEvents: 'none' }} ref={sliderRef} />
                 {navLinks.map(l => (
@@ -124,7 +149,7 @@ function Navbar() {
                 ))}
             </ul>
 
-            <div className="flex items-center gap-3 ml-auto" style={{ position: 'relative' }}>
+            <div className="flex items-center gap-3 ml-auto">
                 <div className="hidden md:flex items-center gap-3">
                     <ClockAndStatus businessInfo={businessInfo} />
                 </div>
@@ -135,18 +160,6 @@ function Navbar() {
                         <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">{cartCount}</span>
                     )}
                 </button>
-                {/* Hamburger — mobile only, RIGHT of cart */}
-                <button className="hamburger" aria-label="Open menu" onClick={() => setMenuOpen(o => !o)}>
-                    <span></span><span></span><span></span>
-                </button>
-                {/* Mobile dropdown */}
-                {menuOpen && (
-                    <ul style={{ position: 'absolute', top: '110%', right: 0, width: '160px', background: 'var(--nav-bg)', borderRadius: '0 0 12px 12px', boxShadow: '0 8px 24px rgba(0,0,0,0.18)', padding: '8px', zIndex: 99, display: 'flex', flexDirection: 'column', gap: '4px', listStyle: 'none', margin: 0 }}>
-                        {navLinks.map(l => (
-                            <li key={l.to}><Link to={l.to} className={isActive(l.to)} onClick={closeMenu} style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', color: '#fff', fontWeight: 600, fontSize: '0.95rem', background: 'rgba(255,255,255,0.1)' }}>{l.label}</Link></li>
-                        ))}
-                    </ul>
-                )}
             </div>
         </nav>
         <OfferTicker />
