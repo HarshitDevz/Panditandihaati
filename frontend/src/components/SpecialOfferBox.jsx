@@ -41,7 +41,7 @@ export default function SpecialOfferBox() {
 
   const handleOrder = () => {
     // Navigate to the menu page instead of opening WhatsApp
-    window.location.href = '/menu.html';
+    window.location.href = '/menu';
   };
 
   return (

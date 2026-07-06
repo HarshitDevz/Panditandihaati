@@ -41,10 +41,10 @@ function Navbar() {
     if (businessInfo && businessInfo.maintenance) return null;
 
     const isActive = (path) => {
-        return location.pathname === path || (location.pathname === '/' && path === '/home.html') ? 'active' : '';
+        return location.pathname === path || (location.pathname === '/' && path === '/home') ? 'active' : '';
     };
 
-    const isAuthPage = ['/signup.html', '/login.html', '/forget.html', '/reset-password.html'].includes(location.pathname);
+    const isAuthPage = ['/signup', '/login', '/forget', '/reset-password'].includes(location.pathname);
 
     const closeMenu = () => {
         const cb = document.getElementById('menu-toggle');
@@ -82,12 +82,12 @@ function Navbar() {
 
             {/* Left Menu */}
                 <ul className="nav-left flex-1">
-                <li><Link to="/home.html" className={isActive('/home.html')} onClick={closeMenu}>Home</Link></li>
+                <li><Link to="/home" className={isActive('/home')} onClick={closeMenu}>Home</Link></li>
                 {!isAuthPage && (
                     <>
-                        <li><Link to="/menu.html" className={isActive('/menu.html')} onClick={closeMenu}>Menu</Link></li>
-                        <li><Link to="/about.html" className={isActive('/about.html')} onClick={closeMenu}>About</Link></li>
-                        <li><Link to="/contact.html" className={isActive('/contact.html')} onClick={closeMenu}>Contact</Link></li>
+                        <li><Link to="/menu" className={isActive('/menu')} onClick={closeMenu}>Menu</Link></li>
+                        <li><Link to="/about" className={isActive('/about')} onClick={closeMenu}>About</Link></li>
+                        <li><Link to="/contact" className={isActive('/contact')} onClick={closeMenu}>Contact</Link></li>
                     </>
                 )}
             </ul>

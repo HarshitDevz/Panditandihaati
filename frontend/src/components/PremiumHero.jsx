@@ -65,7 +65,7 @@ export default function PremiumHero({
           </motion.p>
 
           <motion.div variants={line} className="mt-7 flex flex-wrap items-center gap-4">
-            <Link to="/menu.html" className="relative inline-flex items-center">
+            <Link to="/menu" className="relative inline-flex items-center">
               <motion.button whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.98 }} transition={{ duration: 0.18 }} className="rounded-2xl bg-[#ff9800] px-7 py-3 text-sm font-bold text-white shadow-[0_18px_40px_rgba(255,152,0,0.32)]">
                 {ctaText}
               </motion.button>

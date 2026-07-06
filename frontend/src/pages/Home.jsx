@@ -102,7 +102,7 @@ function Home() {
                                     <div className="overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center opacity-100 md:opacity-0 md:hover:opacity-100 transition duration-300 z-20">
                                         <h4 className="text-white text-xl font-bold">{product.name}</h4>
                                         <p className="text-white text-sm">Tap to view menu &amp; buy</p>
-                                        <Link to="/menu.html" className="mt-3 px-4 py-2 bg-[#ff9800] text-white rounded-full font-bold shadow z-30">
+            <Link to="/menu" className="mt-3 px-4 py-2 bg-[#ff9800] text-white rounded-full font-bold shadow z-30">
                                             Show All
                                         </Link>
                                     </div>

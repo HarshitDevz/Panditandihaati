@@ -77,16 +77,16 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
-        <Route path="/home.html" element={<Home />} />
-        <Route path="/menu.html" element={<Menu />} />
-        <Route path="/about.html" element={<About />} />
-        <Route path="/contact.html" element={<Contact />} />
-        <Route path="/privacy.html" element={<Privacy />} />
-        <Route path="/terms.html" element={<Terms />} />
-        <Route path="/login.html" element={<Login />} />
-        <Route path="/signup.html" element={<Signup />} />
-        <Route path="/forget.html" element={<ForgetPassword />} />
-        <Route path="/reset-password.html" element={<ForgetPassword />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/forget" element={<ForgetPassword />} />
+        <Route path="/reset-password" element={<ForgetPassword />} />
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>

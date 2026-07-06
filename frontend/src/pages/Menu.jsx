@@ -30,7 +30,7 @@ function Menu() {
         <>
             {/* Hero Section */}
             <header className="hero">
-                <Link to="/home.html">
+                <Link to="/home">
                     <img src="images/LOGO.png" loading="lazy" className="logo" alt="Panditan Di Hatti Logo" />
                 </Link>
                 <h1>Our Specialties</h1>

@@ -4,6 +4,51 @@
   command = "npm run build"
 
 [[redirects]]
+  from = "/home.html"
+  to = "/home"
+  status = 301
+
+[[redirects]]
+  from = "/menu.html"
+  to = "/menu"
+  status = 301
+
+[[redirects]]
+  from = "/about.html"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy"
+  status = 301
+
+[[redirects]]
+  from = "/terms.html"
+  to = "/terms"
+  status = 301
+
+[[redirects]]
+  from = "/login.html"
+  to = "/login"
+  status = 301
+
+[[redirects]]
+  from = "/signup.html"
+  to = "/signup"
+  status = 301
+
+[[redirects]]
+  from = "/forget.html"
+  to = "/forget"
+  status = 301
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

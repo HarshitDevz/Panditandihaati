@@ -38,11 +38,11 @@ function Footer() {
                     </div>
 
                     <div className="flex items-center gap-4 mt-4 text-sm">
-                        <Link to="/privacy.html" className="text-gray-300 hover:text-white">Privacy</Link>
+                        <Link to="/privacy" className="text-gray-300 hover:text-white">Privacy</Link>
                         <span className="text-gray-600">•</span>
-                        <Link to="/terms.html" className="text-gray-300 hover:text-white">Terms</Link>
+                        <Link to="/terms" className="text-gray-300 hover:text-white">Terms</Link>
                         <span className="text-gray-600">•</span>
-                        <Link to="/contact.html" className="text-gray-300 hover:text-white">Contact</Link>
+                        <Link to="/contact" className="text-gray-300 hover:text-white">Contact</Link>
                     </div>
                 </div>
 
