@@ -55,7 +55,8 @@ function Navbar() {
         <>
         {/* Top welcome strip */}
             {businessInfo && !(isMobile && welcomeDismissedMobile) && (
-                <div className="hidden md:flex items-center justify-center bg-black text-white py-2 text-sm font-medium">
+                <div className="hidden md:flex items-center justify-center relative bg-black text-white py-2 text-sm font-medium px-6">
+                        <span className="absolute left-6 text-xs text-gray-400 font-medium tracking-wide">📞 {businessInfo?.phone || '98166-51543'}</span>
                         <div className="mx-2 text-center" style={{ fontFamily: "'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial" }}>
                             <span className="inline-flex items-center gap-3">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden focusable="false">
@@ -69,6 +70,7 @@ function Navbar() {
                                 </svg>
                             </span>
                         </div>
+                        <span className="absolute right-6 text-xs text-gray-400 font-medium tracking-wide">GSTIN: 02AMWPS9440GIZK</span>
                 </div>
             )}
         <nav aria-label="Main navigation">

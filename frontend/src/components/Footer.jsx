@@ -23,6 +23,7 @@ function Footer() {
                         <div>
                     <h2 className="text-2xl font-extrabold text-[#b14520]">Panditan Di Hatti</h2>
                             <p className="text-sm text-gray-500">Authentic Himachali sweets & snacks</p>
+                            <p className="text-xs text-gray-500 mt-0.5">GSTIN: 02AMWPS9440GIZK</p>
                         </div>
                     </div>
 
@@ -36,6 +37,8 @@ function Footer() {
 
                         <a href={`https://wa.me/${businessInfo?.whatsappNumber || ''}`} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-700">WhatsApp</a>
                     </div>
+
+                    <p className="text-xs text-gray-500 mt-1">GSTIN: 02AMWPS9440GIZK</p>
 
                     <div className="flex items-center gap-4 mt-4 text-sm">
                         <Link to="/privacy" className="text-gray-300 hover:text-white">Privacy</Link>
