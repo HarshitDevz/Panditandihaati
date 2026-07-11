@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { useData } from './context/DataContext';
@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
 import AdminDashboard from './pages/Admin/Dashboard';
 import SpecialOfferBox from './components/SpecialOfferBox';
+import SplashScreen from './components/SplashScreen';
 
 // Lazy loading the page components
 const Home = React.lazy(() => import('./pages/Home'));
@@ -23,7 +24,10 @@ const ForgetPassword = React.lazy(() => import('./pages/ForgetPassword'));
 const AdminLogin = React.lazy(() => import('./pages/Admin/Login'));
 
 function App() {
+  const [splashDone, setSplashDone] = useState(false);
   return (
+    <>
+      {!splashDone && <SplashScreen onDone={() => setSplashDone(true)} />}
     <DataProvider>
       <CartProvider>
         <Router>
@@ -40,6 +44,7 @@ function App() {
         </Router>
       </CartProvider>
     </DataProvider>
+    </>
   );
 }
 

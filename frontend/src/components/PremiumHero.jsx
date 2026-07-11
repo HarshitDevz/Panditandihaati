@@ -5,12 +5,12 @@ import { useData } from '../context/DataContext';
 
 const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } }
+  visible: { transition: { staggerChildren: 0.04 } }
 };
 
 const line = {
-  hidden: { opacity: 0, y: 18 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+  hidden: { opacity: 0, y: 8 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.25, ease: 'easeOut' } }
 };
 
 function ClockBadge({ businessInfo }) {
@@ -45,7 +45,7 @@ export default function PremiumHero({
   const words = String(title).split(' ');
 
   return (
-    <motion.header ref={ref} className="hero relative overflow-hidden bg-gradient-to-br from-[#fffaf3] via-[#fff7ef] to-[#fffdf9] px-4 py-8 md:px-10 md:py-20" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
+    <motion.header ref={ref} className="hero relative overflow-hidden bg-gradient-to-br from-[#fffaf3] via-[#fff7ef] to-[#fffdf9] px-4 py-4 md:px-10 md:py-20" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.82),_transparent_54%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.5)_62%,rgba(255,255,255,0.92))]" />
@@ -58,7 +58,7 @@ export default function PremiumHero({
             {eyebrow}
           </motion.div>
 
-          <motion.h1 className="overflow-hidden text-left text-3xl font-black leading-[0.94] tracking-tight text-[#21140f] sm:text-4xl md:text-6xl lg:text-7xl">
+          <motion.h1 className="overflow-hidden text-left text-xl font-black leading-[0.94] tracking-tight text-[#21140f] sm:text-4xl md:text-6xl lg:text-7xl">
             {words.map((word, index) => (
               <motion.span key={`${word}-${index}`} className="mr-3 inline-block" variants={line}>
                 {word}
@@ -66,11 +66,11 @@ export default function PremiumHero({
             ))}
           </motion.h1>
 
-          <motion.p className="mt-5 max-w-xl text-left text-base leading-7 text-[#5a4a3a] md:text-lg" variants={line}>
-            {subtitle || `A refined sweets counter offering traditional mithai, savoury snacks, and dependable daily service in a presentation that feels established and orderly.`}
+          <motion.p className="mt-2 max-w-xl text-left text-xs leading-5 text-[#5a4a3a] md:text-lg" variants={line}>
+            {subtitle || `A refined sweets counter offering traditional mithai, savoury snacks, and dependable daily service.`}
           </motion.p>
 
-          <motion.div variants={line} className="mt-7 flex flex-wrap items-center gap-4">
+          <motion.div variants={line} className="mt-3 flex flex-wrap items-center gap-2">
             <Link to="/menu" className="relative inline-flex items-center">
               <motion.button whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.98 }} transition={{ duration: 0.18 }} className="rounded-2xl bg-[#ff9800] px-7 py-3 text-sm font-bold text-white shadow-[0_18px_40px_rgba(255,152,0,0.32)]">
                 {ctaText}
@@ -80,7 +80,7 @@ export default function PremiumHero({
             <ClockBadge businessInfo={businessInfo} />
           </motion.div>
 
-          <motion.div variants={line} className="mt-7 flex flex-wrap gap-3">
+          <motion.div variants={line} className="mt-2 flex flex-wrap gap-2">
             {highlights.map((item) => (
               <div key={item} className="rounded-full border border-[#e4d2bc] bg-white/95 px-4 py-2 text-sm font-semibold text-[#61442e] shadow-sm">
                 {item}
@@ -91,7 +91,7 @@ export default function PremiumHero({
 
         <motion.div className="relative z-10 mx-auto w-full max-w-xl" initial={{ opacity: 0, y: 24, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.75, ease: 'easeOut' }}>
           <div className="rounded-[2rem] border border-white/85 bg-white/90 p-3 shadow-[0_24px_70px_rgba(77,48,15,0.14)] flex flex-col gap-3">
-            <div className="relative overflow-hidden rounded-[1.6rem]" style={{ aspectRatio: '600/460' }}>
+            <div className="relative overflow-hidden rounded-[1.6rem]">
               <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.4),rgba(255,255,255,0.05))]" />
               <motion.img
                 src={image}
@@ -99,9 +99,9 @@ export default function PremiumHero({
                 width={600}
                 height={460}
                 fetchPriority="high"
-                className="absolute inset-0 w-full h-full rounded-[1.6rem] object-cover object-center"
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+                className="w-full h-auto block rounded-[1.6rem]"
+                style={{ position: 'relative' }}
+
               />
             </div>
 
