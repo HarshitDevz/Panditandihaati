@@ -163,19 +163,13 @@ function OverviewManager({ products, announcements }) {
 
 // 1. PRODUCTS MANAGER
 function ProductsManager({ products, setProducts, categories }) {
-    const [editingId, setEditingId] = useState(null);
-    const [editForm, setEditForm] = useState({});
+    const [editProduct, setEditProduct] = useState(null);
     const [isAdding, setIsAdding] = useState(false);
     const [newProduct, setNewProduct] = useState({ name: '', price: 0, unit: '1kg', category: categories[0], desc: '', visible: true, image: 'images/LOGO.png' });
 
-    const startEdit = (p) => {
-        setEditingId(p.id);
-        setEditForm({ ...p });
-    };
-
     const saveEdit = () => {
-        setProducts(prev => prev.map(p => p.id === editingId ? editForm : p));
-        setEditingId(null);
+        setProducts(prev => prev.map(p => p.id === editProduct.id ? editProduct : p));
+        setEditProduct(null);
     };
 
     const addProduct = () => {
@@ -185,6 +179,52 @@ function ProductsManager({ products, setProducts, categories }) {
         setNewProduct({ name: '', price: 0, unit: '1kg', category: categories[0], desc: '', visible: true, image: 'images/LOGO.png' });
     };
 
+    const ProductModal = ({ data, setData, onSave, onCancel, title }) => (
+        <div className="fixed inset-0 bg-black/50 z-[200] flex items-center justify-center p-4">
+            <div className="bg-white rounded-3xl p-8 w-full max-w-lg shadow-2xl">
+                <h3 className="text-xl font-bold mb-6">{title}</h3>
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="col-span-2">
+                        <label className="block text-sm font-bold text-gray-500 mb-1">Product Name</label>
+                        <input type="text" className="w-full p-2 border rounded-lg" value={data.name} onChange={e => setData({ ...data, name: e.target.value })} />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-bold text-gray-500 mb-1">Price (₹)</label>
+                        <input type="number" className="w-full p-2 border rounded-lg" value={data.price} onChange={e => setData({ ...data, price: Number(e.target.value) })} />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-bold text-gray-500 mb-1">Unit</label>
+                        <select className="w-full p-2 border rounded-lg" value={data.unit} onChange={e => setData({ ...data, unit: e.target.value })}>
+                            <option value="1kg">1kg</option>
+                            <option value="500g">500g</option>
+                            <option value="250g">250g</option>
+                            <option value="piece">per piece</option>
+                            <option value="plate">per plate</option>
+                        </select>
+                    </div>
+                    <div className="col-span-2">
+                        <label className="block text-sm font-bold text-gray-500 mb-1">Category</label>
+                        <select className="w-full p-2 border rounded-lg" value={data.category} onChange={e => setData({ ...data, category: e.target.value })}>
+                            {categories.map(c => <option key={c} value={c}>{c}</option>)}
+                        </select>
+                    </div>
+                    <div className="col-span-2">
+                        <label className="block text-sm font-bold text-gray-500 mb-1">Description</label>
+                        <textarea className="w-full p-2 border rounded-lg" value={data.desc} onChange={e => setData({ ...data, desc: e.target.value })} rows="2" />
+                    </div>
+                    <div className="col-span-2">
+                        <label className="block text-sm font-bold text-gray-500 mb-1">Image URL</label>
+                        <input type="text" className="w-full p-2 border rounded-lg" value={data.image} onChange={e => setData({ ...data, image: e.target.value })} placeholder="images/your.webp or https://..." />
+                    </div>
+                </div>
+                <div className="flex gap-4 mt-8">
+                    <button onClick={onCancel} className="flex-1 px-4 py-3 bg-gray-100 text-gray-600 rounded-xl font-bold">Cancel</button>
+                    <button onClick={onSave} className="flex-1 px-4 py-3 bg-[#ff9800] text-white rounded-xl font-bold">Save</button>
+                </div>
+            </div>
+        </div>
+    );
+
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="flex justify-between items-end">
@@ -192,58 +232,13 @@ function ProductsManager({ products, setProducts, categories }) {
                     <h3 className="text-sm font-black text-gray-400 uppercase tracking-widest mb-1">Stock Control</h3>
                     <p className="text-gray-500 text-sm">Use <b>Hidden</b> to disable items from menu without deleting.</p>
                 </div>
-                <button
-                    onClick={() => setIsAdding(true)}
-                    className="bg-[#ff9800] text-white px-8 py-4 rounded-2xl font-black flex items-center gap-3 shadow-xl hover:scale-105 transition-transform"
-                >
+                <button onClick={() => setIsAdding(true)} className="bg-[#ff9800] text-white px-8 py-4 rounded-2xl font-black flex items-center gap-3 shadow-xl hover:scale-105 transition-transform">
                     <Plus size={20} /> New Product
                 </button>
             </div>
 
-            {/* Addition Modal / Form */}
-            {isAdding && (
-                <div className="fixed inset-0 bg-black/50 z-[200] flex items-center justify-center p-4">
-                    <div className="bg-white rounded-3xl p-8 w-full max-w-lg shadow-2xl">
-                        <h3 className="text-xl font-bold mb-6">Add New Product</h3>
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="col-span-2">
-                                <label className="block text-sm font-bold text-gray-500 mb-1">Product Name</label>
-                                <input type="text" className="w-full p-2 border rounded-lg" value={newProduct.name} onChange={e => setNewProduct({ ...newProduct, name: e.target.value })} placeholder="e.g. Dhokla" />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-gray-500 mb-1">Price (₹)</label>
-                                <input type="number" className="w-full p-2 border rounded-lg" value={newProduct.price} onChange={e => setNewProduct({ ...newProduct, price: Number(e.target.value) })} />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-gray-500 mb-1">Unit</label>
-                                <select className="w-full p-2 border rounded-lg" value={newProduct.unit} onChange={e => setNewProduct({ ...newProduct, unit: e.target.value })}>
-                                    <option value="1kg">1kg</option>
-                                    <option value="piece">per piece</option>
-                                    <option value="plate">per plate</option>
-                                </select>
-                            </div>
-                            <div className="col-span-2">
-                                <label className="block text-sm font-bold text-gray-500 mb-1">Category</label>
-                                <select className="w-full p-2 border rounded-lg" value={newProduct.category} onChange={e => setNewProduct({ ...newProduct, category: e.target.value })}>
-                                    {categories.map(c => <option key={c} value={c}>{c}</option>)}
-                                </select>
-                            </div>
-                            <div className="col-span-2">
-                                <label className="block text-sm font-bold text-gray-500 mb-1">Description</label>
-                                <textarea className="w-full p-2 border rounded-lg" value={newProduct.desc} onChange={e => setNewProduct({ ...newProduct, desc: e.target.value })} rows="2" placeholder="Tell something about it" />
-                            </div>
-                            <div className="col-span-2">
-                                <label className="block text-sm font-bold text-gray-500 mb-1">Image URL</label>
-                                <input type="text" className="w-full p-2 border rounded-lg" value={newProduct.image} onChange={e => setNewProduct({ ...newProduct, image: e.target.value })} placeholder="images/your.png or https://..." />
-                            </div>
-                        </div>
-                        <div className="flex gap-4 mt-8">
-                            <button onClick={() => setIsAdding(false)} className="flex-1 px-4 py-3 bg-gray-100 text-gray-600 rounded-xl font-bold">Cancel</button>
-                            <button onClick={addProduct} className="flex-1 px-4 py-3 bg-[#ff9800] text-white rounded-xl font-bold">Save Product</button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            {isAdding && <ProductModal data={newProduct} setData={setNewProduct} onSave={addProduct} onCancel={() => setIsAdding(false)} title="Add New Product" />}
+            {editProduct && <ProductModal data={editProduct} setData={setEditProduct} onSave={saveEdit} onCancel={() => setEditProduct(null)} title="Edit Product" />}
 
             <div className="bg-white rounded-[32px] border border-gray-100 shadow-xl overflow-hidden">
                 <table className="w-full">
@@ -259,10 +254,7 @@ function ProductsManager({ products, setProducts, categories }) {
                         {products.map(p => (
                             <tr key={p.id} className={`${p.visible ? '' : 'bg-gray-50/30'} hover:bg-orange-50/20 transition-all`}>
                                 <td className="px-8 py-6">
-                                    <button
-                                        onClick={() => setProducts(products.map(ip => ip.id === p.id ? { ...ip, visible: !ip.visible } : ip))}
-                                        className={`w-14 h-8 rounded-full relative transition-all duration-300 ${p.visible ? 'bg-orange-500 shadow-inner' : 'bg-gray-200'}`}
-                                    >
+                                    <button onClick={() => setProducts(products.map(ip => ip.id === p.id ? { ...ip, visible: !ip.visible } : ip))} className={`w-14 h-8 rounded-full relative transition-all duration-300 ${p.visible ? 'bg-orange-500 shadow-inner' : 'bg-gray-200'}`}>
                                         <div className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-all ${p.visible ? 'right-1' : 'left-1'}`} />
                                     </button>
                                 </td>
@@ -271,50 +263,19 @@ function ProductsManager({ products, setProducts, categories }) {
                                         <div className="w-14 h-14 bg-gray-100 rounded-2xl overflow-hidden flex-shrink-0 shadow-sm border border-white">
                                             <img src={p.image} className="w-full h-full object-cover" />
                                         </div>
-                                        {editingId === p.id ? (
-                                            <div className="space-y-2 w-full max-w-xs">
-                                                <input type="text" className="border border-orange-200 rounded-lg px-3 py-1 text-sm block w-full outline-none focus:ring-2 focus:ring-orange-100" value={editForm.name} onChange={e => setEditForm({ ...editForm, name: e.target.value })} />
-                                                <input type="text" className="border border-gray-100 rounded-lg px-2 py-1 text-[10px] block w-full lowercase text-gray-400" value={editForm.desc} onChange={e => setEditForm({ ...editForm, desc: e.target.value })} />
-                                                <input type="text" className="border border-gray-100 rounded-lg px-2 py-1 text-[10px] block w-full" value={editForm.image} onChange={e => setEditForm({ ...editForm, image: e.target.value })} placeholder="images/your.png or https://..." />
-                                                <div className="flex gap-2">
-                                                    <select className="p-2 border rounded-lg" value={editForm.unit} onChange={e => setEditForm({ ...editForm, unit: e.target.value })}>
-                                                        <option value="1kg">1kg</option>
-                                                        <option value="500g">500g</option>
-                                                        <option value="250g">250g</option>
-                                                        <option value="100g">100g</option>
-                                                        <option value="piece">per piece</option>
-                                                    </select>
-                                                    <select className="p-2 border rounded-lg flex-1" value={editForm.category} onChange={e => setEditForm({ ...editForm, category: e.target.value })}>
-                                                        {categories.map(c => <option key={c} value={c}>{c}</option>)}
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div>
-                                                <span className={`font-black text-gray-800 ${!p.visible ? 'opacity-40 line-through' : ''}`}>{p.name}</span>
-                                                <p className="text-[10px] font-bold text-gray-400 uppercase mt-0.5 tracking-widest">{p.category}</p>
-                                            </div>
-                                        )}
+                                        <div>
+                                            <span className={`font-black text-gray-800 ${!p.visible ? 'opacity-40 line-through' : ''}`}>{p.name}</span>
+                                            <p className="text-[10px] font-bold text-gray-400 uppercase mt-0.5 tracking-widest">{p.category}</p>
+                                        </div>
                                     </div>
                                 </td>
                                 <td className="px-8 py-6">
-                                    {editingId === p.id ? (
-                                        <div className="flex items-center gap-2 font-black">
-                                            <span className="text-orange-500">₹</span>
-                                            <input type="number" className="border border-orange-200 rounded-lg w-20 px-2 py-1 text-sm outline-none" value={editForm.price} onChange={e => setEditForm({ ...editForm, price: Number(e.target.value) })} />
-                                        </div>
-                                    ) : (
-                                        <span className={`text-xl font-black text-gray-900 ${!p.visible ? 'text-gray-300' : ''}`}>₹{p.price}<span className="text-[10px] font-bold text-gray-300 tracking-tighter ml-1">/{p.unit}</span></span>
-                                    )}
+                                    <span className={`text-xl font-black text-gray-900 ${!p.visible ? 'text-gray-300' : ''}`}>₹{p.price}<span className="text-[10px] font-bold text-gray-300 tracking-tighter ml-1">/{p.unit}</span></span>
                                 </td>
                                 <td className="px-8 py-6 text-right">
                                     <div className="flex justify-end gap-3">
-                                        {editingId === p.id ? (
-                                            <button onClick={saveEdit} className="flex items-center gap-2 py-2 px-4 bg-green-500 text-white rounded-xl text-xs font-black shadow-lg hover:bg-green-600 transition-colors uppercase"><Save size={14} /> Save Changes</button>
-                                        ) : (
-                                            <button onClick={() => startEdit(p)} className="p-3 text-orange-500 bg-orange-50 rounded-2xl hover:bg-[#ff9800] hover:text-white transition-all shadow-sm border border-orange-100"><Save size={18} /></button>
-                                        )}
-                                        <button onClick={() => { if (window.confirm('WARNING: Deleting will remove product history. Better to use Disable. Delete anyway?')) setProducts(products.filter(ip => ip.id !== p.id)) }} className="p-3 text-gray-300 hover:text-red-500 transition-colors"><Trash2 size={18} /></button>
+                                        <button onClick={() => setEditProduct({ ...p })} className="p-3 text-orange-500 bg-orange-50 rounded-2xl hover:bg-[#ff9800] hover:text-white transition-all shadow-sm border border-orange-100"><Save size={18} /></button>
+                                        <button onClick={() => { if (window.confirm('Delete anyway?')) setProducts(products.filter(ip => ip.id !== p.id)) }} className="p-3 text-gray-300 hover:text-red-500 transition-colors"><Trash2 size={18} /></button>
                                     </div>
                                 </td>
                             </tr>
