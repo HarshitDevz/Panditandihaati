@@ -74,12 +74,12 @@ function CartDrawer() {
                                     <span>Total:</span>
                                     <span>₹{cartTotal}</span>
                                 </div>
-                                <button
+                                {/* <button
                                     onClick={handleWhatsAppOrder}
                                     className="w-full bg-[#128C7E] text-white py-3.5 rounded-xl font-bold hover:bg-[#075E54] transition flex items-center justify-center gap-2 text-lg shadow-md"
                                 >
                                     Proceed to Order
-                                </button>
+                                </button> */}
                             </div>
                         )}
                     </motion.aside>
