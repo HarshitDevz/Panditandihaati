@@ -2,22 +2,28 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+// SHA-256 hash of: admin#panditan16@
+const HASH = '0c420ff201615b53debbe1a76aebba935c7a5c960254065d29aa2ef1b0547d89';
+
+async function sha256(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 function AdminLogin() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
-    const [shake, setShake] = useState(false);
     const navigate = useNavigate();
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        // Default admin password for now
-        if (password === import.meta.env.VITE_ADMIN_PASSWORD || password === 'Admin@123') {
+        const hashed = await sha256(password);
+        if (hashed === HASH) {
             localStorage.setItem('pdh_admin_session', 'true');
-            navigate('/admin/dashboard');
+            navigate('/epadmin/dashboard');
         } else {
             setError(true);
-            setShake(true);
-            setTimeout(() => setShake(false), 500);
+            setTimeout(() => setError(false), 2000);
         }
     };
 

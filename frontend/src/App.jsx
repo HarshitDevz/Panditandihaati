@@ -75,7 +75,7 @@ function AnimatedRoutes() {
   // If maintenance enabled and not admin route, show maintenance
   const maintenanceActive = businessInfo && businessInfo.maintenance;
 
-  if (maintenanceActive && !location.pathname.startsWith('/admin')) {
+  if (maintenanceActive && !location.pathname.startsWith('/epadmin')) {
     return (
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
@@ -99,8 +99,8 @@ function AnimatedRoutes() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/forget" element={<ForgetPassword />} />
         <Route path="/reset-password" element={<ForgetPassword />} />
-        <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/epadmin" element={<AdminLogin />} />
+        <Route path="/epadmin/dashboard" element={<AdminDashboard />} />
       </Routes>
     </AnimatePresence>
   );

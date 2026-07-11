@@ -12,7 +12,7 @@ function AdminDashboard() {
     useEffect(() => {
         const session = localStorage.getItem('pdh_admin_session');
         if (!session) {
-            navigate('/admin');
+            navigate('/epadmin');
         } else {
             setIsLoggedIn(true);
         }
@@ -53,7 +53,7 @@ function AdminDashboard() {
 
     const handleLogout = () => {
         localStorage.removeItem('pdh_admin_session');
-        navigate('/admin');
+        navigate('/epadmin');
     };
 
     if (!isLoggedIn) return null;
