@@ -90,7 +90,7 @@ function Footer() {
             <div className="bg-[#0b1220] border-t border-gray-900">
                 <div className="max-w-7xl mx-auto px-6 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400 gap-3">
                     <div className="w-full md:w-auto text-center md:text-left">© {new Date().getFullYear()} Pandittan Di Hatti</div>
-                    <div className="w-full md:w-auto text-center md:text-right">Website designed and Crafted with love ❤️</div>
+                    <div className="w-full md:w-auto text-center md:text-right">Website Crafted with love ❤️</div>
                 </div>
             </div>
         </footer>
