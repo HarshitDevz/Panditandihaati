@@ -116,8 +116,7 @@ function Footer() {
                     <h3 className="text-lg font-bold text-gray-100 mb-3">Visit Us</h3>
                     <div className="w-full rounded-xl overflow-hidden border border-gray-800 shadow-sm" style={{ height: 220 }}>
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d848.6498086260543!2d76.51992589999999!3d31.699522208486563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3904d443ecf19601%3A0xffb6a63e8aae8b2f!2sPanditan%20Di%20Hatti!5e0!3m2!1sen!2sin!4v1764696376808!5m2!1sen!2sin"
-                            allowFullScreen
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3394.6088691811356!2d76.5188905!3d31.6992589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3904d443ecf19601%3A0xffb6a63e8aae8b2f!2sPanditan%20Di%20Hatti!5e0!3m2!1sen!2sin!4v1783760532515!5m2!1sen!2sin"
                             loading="lazy"
                             title="Panditan Di Hatti location on Google Maps"
                             width="100%"
@@ -132,7 +131,7 @@ function Footer() {
             <div className="bg-[#0b1220] border-t border-gray-900">
                 <div className="max-w-7xl mx-auto px-6 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400 gap-3">
                     <div className="w-full md:w-auto text-center md:text-left">© {new Date().getFullYear()} Panditan Di Hatti</div>
-                    <div className="w-full md:w-auto text-center md:text-right">Website designed by Harshit — Licensed under MIT</div>
+                    <div className="w-full md:w-auto text-center md:text-right">Website designed and Crafted with love ❤️</div>
                 </div>
             </div>
         </footer>
