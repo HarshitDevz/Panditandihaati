@@ -68,7 +68,7 @@ function AdminDashboard() {
                     </div>
                     <div>
                         <h2 className="text-lg font-black text-gray-900 leading-none">Admin Console</h2>
-                        <p className="text-gray-400 text-xs font-semibold mt-1">Panditan Di Hatti — Manage your shop</p>
+                        <p className="text-gray-400 text-xs font-semibold mt-1">Pandittan Di Hatti — Manage your shop</p>
                     </div>
                 </div>
                     <div className="flex items-center gap-4">
@@ -428,7 +428,7 @@ function BusinessInfoManager({ businessInfo, setBusinessInfo }) {
         }
         // Ensure welcomeText exists for older data
         if (!form.welcomeText) {
-            setForm(prev => ({ ...prev, welcomeText: 'Welcome to Panditan Di Hatti — Fresh sweets made with love!' }));
+            setForm(prev => ({ ...prev, welcomeText: 'Welcome to Pandittan Di Hatti — Fresh sweets made with love!' }));
         }
     }, []);
 
@@ -458,6 +458,21 @@ function BusinessInfoManager({ businessInfo, setBusinessInfo }) {
                 <div className="space-y-2">
                     <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest pl-1">Display Phone</label>
                     <input type="text" className="w-full p-4 bg-gray-50 border-none rounded-2xl font-bold focus:ring-2 focus:ring-orange-200 outline-none" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} />
+                </div>
+                <div className="space-y-2">
+                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest pl-1">DevTools Protection</label>
+                    <div className="flex items-center gap-3">
+                        <button
+                            onClick={() => {
+                                const updated = { ...form, devToolsProtection: !form.devToolsProtection };
+                                setForm(updated);
+                                setBusinessInfo(updated);
+                            }}
+                            className={`px-4 py-2 rounded-xl font-bold ${form.devToolsProtection ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-700'}`}>
+                            {form.devToolsProtection ? 'Enabled' : 'Disabled'}
+                        </button>
+                        <p className="text-xs text-gray-500">Blocks right-click & F12/Inspect on public site.</p>
+                    </div>
                 </div>
                 <div className="space-y-2">
                     <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest pl-1">Maintenance Mode</label>

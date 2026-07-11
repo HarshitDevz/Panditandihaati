@@ -42,7 +42,7 @@ export default function SplashScreen({ onDone }) {
                             margin: 0, letterSpacing: 1, textAlign: 'center',
                         }}
                     >
-                        Panditan Di Hatti
+                        Pandittan Di Hatti
                     </motion.h1>
                     <motion.p
                         {...item(0.22)}

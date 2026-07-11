@@ -11,7 +11,7 @@ function CartDrawer() {
     // AnimatePresence will handle conditional rendering with animations.
 
     const handleWhatsAppOrder = () => {
-        let message = "Hi! I want to order from Panditan Di Hatti:\n";
+        let message = "Hi! I want to order from Pandittan Di Hatti:\n";
         cartItems.forEach(item => {
             message += `- ${item.name} x ${item.qty} ${item.unit} = ₹${item.price * item.qty}\n`;
         });

@@ -9,7 +9,7 @@ export default function Terms() {
     <main className="max-w-3xl mx-auto p-6">
       <div className="bg-white rounded-lg p-6 shadow-sm">
         <h1 className="text-3xl font-extrabold mb-4 text-[#b14520]">Terms of Service</h1>
-        <p className="text-gray-700 mb-4">These are the basic Terms of Service for {businessInfo?.name || 'Panditan Di Hatti'}. This site is a demo storefront. Orders placed are fulfilled locally by the shop and are subject to availability.</p>
+        <p className="text-gray-700 mb-4">These are the basic Terms of Service for {businessInfo?.name || 'Pandittan Di Hatti'}. This site is a demo storefront. Orders placed are fulfilled locally by the shop and are subject to availability.</p>
 
         <h2 className="text-xl font-bold mt-6 mb-2">Acceptable Use</h2>
         <p className="text-gray-700">Users must not abuse the site or submit spammy content.</p>

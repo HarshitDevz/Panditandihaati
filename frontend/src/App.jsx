@@ -11,6 +11,28 @@ import AdminDashboard from './pages/Admin/Dashboard';
 import SpecialOfferBox from './components/SpecialOfferBox';
 import SplashScreen from './components/SplashScreen';
 
+function DevToolsGuard() {
+  const { businessInfo } = useData();
+  useEffect(() => {
+    if (!businessInfo?.devToolsProtection) return;
+    const block = (e) => e.preventDefault();
+    const blockKeys = (e) => {
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) ||
+        (e.ctrlKey && e.key.toUpperCase() === 'U')
+      ) e.preventDefault();
+    };
+    document.addEventListener('contextmenu', block);
+    document.addEventListener('keydown', blockKeys);
+    return () => {
+      document.removeEventListener('contextmenu', block);
+      document.removeEventListener('keydown', blockKeys);
+    };
+  }, [businessInfo?.devToolsProtection]);
+  return null;
+}
+
 // Lazy loading the page components
 const Home = React.lazy(() => import('./pages/Home'));
 const Menu = React.lazy(() => import('./pages/Menu'));
@@ -32,6 +54,7 @@ function App() {
       <CartProvider>
         <Router>
           <ScrollToTop />
+          <DevToolsGuard />
           <Navbar />
           <CartDrawer />
           <Suspense fallback={<div style={{ padding: '50px', textAlign: 'center' }} aria-live="polite">Loading...</div>}>
@@ -68,7 +91,7 @@ function AnimatedRoutes() {
       <h1 style={{ fontSize: 56, marginBottom: 12, fontWeight: 800 }}>We'll be right back</h1>
       <p style={{ color: '#6b6b6b', marginBottom: 18, fontSize: 20 }}>The site is currently under maintenance. We're working on improvements — please check back shortly.</p>
       <p style={{ color: '#333', fontSize: 18, marginBottom: 6, fontWeight: 700 }}>Contact: {businessInfo?.phone || '—'}</p>
-      <p style={{ color: '#333', marginTop: 12, fontWeight: 800, fontSize: 18 }}>Thank you for your cooperation — {businessInfo?.name || 'Panditan Di Hatti'}</p>
+      <p style={{ color: '#333', marginTop: 12, fontWeight: 800, fontSize: 18 }}>Thank you for your cooperation — {businessInfo?.name || 'Pandittan Di Hatti'}</p>
     </div>
   );
 

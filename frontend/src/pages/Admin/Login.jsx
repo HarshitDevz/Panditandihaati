@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-// SHA-256 hash of: admin#panditan16@
+// SHA-256 hash of: admin#Pandittan16@
 const HASH = '0c420ff201615b53debbe1a76aebba935c7a5c960254065d29aa2ef1b0547d89';
 
 async function sha256(str) {
@@ -61,7 +61,7 @@ function AdminLogin() {
                 </form>
 
                 <p className="mt-8 text-center text-xs text-gray-400">
-                    &copy; 2026 Panditan Di Hatti — Admin Secure Access
+                    &copy; 2026 Pandittan Di Hatti — Admin Secure Access
                 </p>
             </motion.div>
 

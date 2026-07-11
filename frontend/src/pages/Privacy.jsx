@@ -9,7 +9,7 @@ export default function Privacy() {
     <main className="max-w-3xl mx-auto p-6">
       <div className="bg-white rounded-lg p-6 shadow-sm">
         <h1 className="text-3xl font-extrabold mb-4 text-[#b14520]">Privacy Policy</h1>
-        <p className="text-gray-700 mb-4">{businessInfo?.name || 'Panditan Di Hatti'} values your privacy. This page summarises how we handle data for this demo storefront. We do not sell personal data. Local storage is used to persist cart and admin settings for your convenience.</p>
+        <p className="text-gray-700 mb-4">{businessInfo?.name || 'Pandittan Di Hatti'} values your privacy. This page summarises how we handle data for this demo storefront. We do not sell personal data. Local storage is used to persist cart and admin settings for your convenience.</p>
 
         <h2 className="text-xl font-bold mt-6 mb-2">Data We Collect</h2>
         <ul className="list-disc ml-6 text-gray-700">

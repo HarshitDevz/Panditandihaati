@@ -24,7 +24,7 @@ function YoutubeFacade({ videoId }) {
             <div style={wrapper}>
                 <iframe
                     src={`https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&modestbranding=1`}
-                    title="PM Modi Ji featuring Panditan Di Hatti Besan Barfi"
+                    title="PM Modi Ji featuring Pandittan Di Hatti Besan Barfi"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
@@ -38,7 +38,7 @@ function YoutubeFacade({ videoId }) {
         <div style={wrapper} onClick={() => setLoaded(true)} role="button" aria-label="Play PM Modi Ji video">
             <img
                 src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
-                alt="PM Modi Ji featuring Panditan Di Hatti — tap to play"
+                alt="PM Modi Ji featuring Pandittan Di Hatti — tap to play"
                 style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
                 loading="lazy" width={720} height={405}
             />
@@ -77,7 +77,7 @@ function Home() {
             <div style={{ position: 'relative' }}>
                 <div style={{ position: 'sticky', top: 0, zIndex: 1 }}>
                     <PremiumHero
-                        title="Panditan Di Hatti"
+                        title="Pandittan Di Hatti"
                         subtitle={<>A refined sweets and snacks counter, presented with a calm animated storefront and clear emphasis on quality, freshness, and trust.<br /><strong>Anu, Himachal Pradesh — 177005.</strong></>}
                         ctaText="View Menu"
                         eyebrow="Established 1980"
@@ -101,7 +101,7 @@ function Home() {
                             </div>
                         </div>
                         <div className="section-media">
-                            <img src="images/OWNER.webp" loading="lazy" alt="Owner of Panditan Di Hatti" width={440} height={440} />
+                            <img src="images/OWNER.webp" loading="lazy" alt="Owner of Pandittan Di Hatti" width={440} height={440} />
                         </div>
                     </div>
                 </section>
@@ -162,7 +162,7 @@ function Home() {
                         { id: 4, name: 'Anka', rating: 5, image: 'images/4.webp', text: 'Best traditional Himachali sweets particularly besan ke barfi. Service is excellent and very well behaved shop owner and staff!! Must try Besan Ke Barfi!!' }
                     ]} />
                     <div className="reviews-cta">
-                        <a className="cta-btn" href="https://g.page/r/panditandihaati/review" target="_blank" rel="noopener noreferrer">📝 Write a Review</a>
+                        <a className="cta-btn" href="https://g.page/r/Pandittandihaati/review" target="_blank" rel="noopener noreferrer">📝 Write a Review</a>
                     </div>
                 </div>
             </section>

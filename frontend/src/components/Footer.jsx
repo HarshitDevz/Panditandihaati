@@ -19,9 +19,9 @@ function Footer() {
                 {/* Left: Branding & CTA */}
                 <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                        <img src="/images/LOGO.webp" alt="Panditan Di Hatti" width={56} height={56} className="w-14 h-14 object-contain rounded" />
+                        <img src="/images/LOGO.webp" alt="Pandittan Di Hatti" width={56} height={56} className="w-14 h-14 object-contain rounded" />
                         <div>
-                    <h2 className="text-2xl font-extrabold text-[#b14520]">Panditan Di Hatti</h2>
+                    <h2 className="text-2xl font-extrabold text-[#b14520]">Pandittan Di Hatti</h2>
                             <p className="text-sm text-gray-500">Authentic Himachali sweets & snacks</p>
                             <span className="inline-flex items-center gap-1.5 mt-1 px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[11px] font-mono font-semibold text-amber-400 tracking-widest">
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -116,9 +116,9 @@ function Footer() {
                     <h3 className="text-lg font-bold text-gray-100 mb-3">Visit Us</h3>
                     <div className="w-full rounded-xl overflow-hidden border border-gray-800 shadow-sm" style={{ height: 220 }}>
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3394.6088691811356!2d76.5188905!3d31.6992589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3904d443ecf19601%3A0xffb6a63e8aae8b2f!2sPanditan%20Di%20Hatti!5e0!3m2!1sen!2sin!4v1783760532515!5m2!1sen!2sin"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3394.6088691811356!2d76.5188905!3d31.6992589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3904d443ecf19601%3A0xffb6a63e8aae8b2f!2sPandittan%20Di%20Hatti!5e0!3m2!1sen!2sin!4v1783760532515!5m2!1sen!2sin"
                             loading="lazy"
-                            title="Panditan Di Hatti location on Google Maps"
+                            title="Pandittan Di Hatti location on Google Maps"
                             width="100%"
                             height="220"
                             style={{ border: 0, display: 'block' }}
@@ -130,7 +130,7 @@ function Footer() {
 
             <div className="bg-[#0b1220] border-t border-gray-900">
                 <div className="max-w-7xl mx-auto px-6 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400 gap-3">
-                    <div className="w-full md:w-auto text-center md:text-left">© {new Date().getFullYear()} Panditan Di Hatti</div>
+                    <div className="w-full md:w-auto text-center md:text-left">© {new Date().getFullYear()} Pandittan Di Hatti</div>
                     <div className="w-full md:w-auto text-center md:text-right">Website designed and Crafted with love ❤️</div>
                 </div>
             </div>

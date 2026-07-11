@@ -31,7 +31,7 @@ function ClockBadge({ businessInfo }) {
 }
 
 export default function PremiumHero({
-  title = 'Panditan Di Hatti',
+  title = 'Pandittan Di Hatti',
   subtitle,
   ctaText = 'Order Now',
   eyebrow = 'Established 1980',
@@ -95,7 +95,7 @@ export default function PremiumHero({
               <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.4),rgba(255,255,255,0.05))]" />
               <motion.img
                 src={image}
-                alt="Panditan Di Hatti shop front in Hamirpur, Himachal Pradesh"
+                alt="Pandittan Di Hatti shop front in Hamirpur, Himachal Pradesh"
                 width={600}
                 height={460}
                 fetchPriority="high"

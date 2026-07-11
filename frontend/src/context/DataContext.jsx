@@ -67,10 +67,11 @@ const defaultBusinessInfo = {
         Saturday: '08:00 AM – 08:30 PM',
         Sunday: '08:00 AM – 08:30 PM',
     },
-    aboutUs: 'Panditan Di Hatti is a legendary sweets and snacks shop near PG Degree College in Hamirpur (Anu), Himachal Pradesh. With a proud history since the 1980s and over 1,250+ reviews averaging 4.5★, we’re a must-visit for both locals and tourists.',
+    aboutUs: 'Pandittan Di Hatti is a legendary sweets and snacks shop near PG Degree College in Hamirpur (Anu), Himachal Pradesh. With a proud history since the 1980s and over 1,250+ reviews averaging 4.5★, we’re a must-visit for both locals and tourists.',
     whatsappNumber: '919816651543',
-    welcomeText: 'Welcome to Panditan Di Hatti — Fresh sweets made with love!',
-    maintenance: false
+    welcomeText: 'Welcome to Pandittan Di Hatti — Fresh sweets made with love!',
+    maintenance: false,
+    devToolsProtection: true
 };
 
 export function DataProvider({ children }) {
