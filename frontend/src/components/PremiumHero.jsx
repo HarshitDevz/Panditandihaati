@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 
@@ -13,41 +13,47 @@ const line = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
 };
 
+function ClockBadge({ businessInfo }) {
+  const [now, setNow] = useState(new Date());
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div className="flex items-center gap-3 rounded-2xl border border-white/70 bg-white/95 px-4 py-3 shadow-sm">
+      <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8d5b24]">Today</div>
+      <div className="text-sm font-bold text-[#21140f]">{now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+      <div className={`rounded-full px-3 py-1 text-xs font-bold ${isOpenHero(businessInfo, now) ? 'bg-emerald-500 text-white' : 'bg-red-600 text-white'}`}>
+        {isOpenHero(businessInfo, now) ? 'Open' : 'Closed'}
+      </div>
+    </div>
+  );
+}
+
 export default function PremiumHero({
   title = 'Panditan Di Hatti',
   subtitle,
   ctaText = 'Order Now',
   eyebrow = 'Established 1980',
   highlights = ['Premium sweets', 'Fresh preparation', 'Trusted locally'],
-  image = '/images/shop.png',
-  accentImage = '/images/BESAN BARFI.png'
+  image = '/images/shop.webp',
+  accentImage = '/images/BESAN BARFI.webp'
 }) {
   const ref = useRef(null);
   const { businessInfo } = useData();
-  const [now, setNow] = useState(new Date());
-
-  useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
-  }, []);
-  const { scrollY } = useScroll({ target: ref });
-  const bgScale = useTransform(scrollY, [0, 400], [1.05, 1]);
-  const bgY = useTransform(scrollY, [0, 400], [0, -40]);
 
   const words = String(title).split(' ');
 
   return (
     <motion.header ref={ref} className="hero relative overflow-hidden bg-gradient-to-br from-[#fffaf3] via-[#fff7ef] to-[#fffdf9] px-4 py-8 md:px-10 md:py-20" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
-      <motion.div style={{ scale: bgScale, y: bgY }} className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-20 -left-16 h-64 w-64 rounded-full bg-[#d9a15f]/18 blur-3xl" />
-        <div className="absolute right-0 top-12 h-72 w-72 rounded-full bg-[#e6c18f]/22 blur-3xl" />
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.82),_transparent_54%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.5)_62%,rgba(255,255,255,0.92))]" />
-      </motion.div>
+      </div>
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div className="relative z-10 max-w-2xl" variants={container} initial="hidden" animate="visible">
-          <motion.div variants={line} className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d9c3a7] bg-white/85 px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] text-[#8d5b24] shadow-sm backdrop-blur">
+          <motion.div variants={line} className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d9c3a7] bg-white/95 px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] text-[#8d5b24] shadow-sm">
             <span className="h-2 w-2 rounded-full bg-[#ff9800]" />
             {eyebrow}
           </motion.div>
@@ -71,18 +77,12 @@ export default function PremiumHero({
               </motion.button>
             </Link>
 
-            <div className="flex items-center gap-3 rounded-2xl border border-white/70 bg-white/85 px-4 py-3 shadow-sm backdrop-blur">
-              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8d5b24]">Today</div>
-              <div className="text-sm font-bold text-[#21140f]">{now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
-              <div className={`rounded-full px-3 py-1 text-xs font-bold ${isOpenHero(businessInfo, now) ? 'bg-emerald-500 text-white' : 'bg-red-600 text-white'}`}>
-                {isOpenHero(businessInfo, now) ? 'Open' : 'Closed'}
-              </div>
-            </div>
+            <ClockBadge businessInfo={businessInfo} />
           </motion.div>
 
           <motion.div variants={line} className="mt-7 flex flex-wrap gap-3">
             {highlights.map((item) => (
-              <div key={item} className="rounded-full border border-[#e4d2bc] bg-white/88 px-4 py-2 text-sm font-semibold text-[#61442e] shadow-sm backdrop-blur">
+              <div key={item} className="rounded-full border border-[#e4d2bc] bg-white/95 px-4 py-2 text-sm font-semibold text-[#61442e] shadow-sm">
                 {item}
               </div>
             ))}
@@ -90,16 +90,16 @@ export default function PremiumHero({
         </motion.div>
 
         <motion.div className="relative z-10 mx-auto w-full max-w-xl" initial={{ opacity: 0, y: 24, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.75, ease: 'easeOut' }}>
-          <div className="rounded-[2rem] border border-white/85 bg-white/68 p-3 shadow-[0_24px_70px_rgba(77,48,15,0.14)] backdrop-blur-lg flex flex-col gap-3">
-            <div className="relative overflow-hidden rounded-[1.6rem]">
-              <motion.div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.82),rgba(255,255,255,0.12))]" animate={{ opacity: [0.55, 0.82, 0.55] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} />
+          <div className="rounded-[2rem] border border-white/85 bg-white/90 p-3 shadow-[0_24px_70px_rgba(77,48,15,0.14)] flex flex-col gap-3">
+            <div className="relative overflow-hidden rounded-[1.6rem]" style={{ aspectRatio: '600/460' }}>
+              <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.4),rgba(255,255,255,0.05))]" />
               <motion.img
                 src={image}
                 alt="Panditan Di Hatti shop front in Hamirpur, Himachal Pradesh"
                 width={600}
                 height={460}
                 fetchPriority="high"
-                className="relative w-full rounded-[1.6rem] object-contain object-center"
+                className="absolute inset-0 w-full h-full rounded-[1.6rem] object-cover object-center"
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
               />

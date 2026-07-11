@@ -15,16 +15,15 @@ function ProductCard({ product, onView }) {
             className="menu-item group bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 overflow-hidden flex flex-col justify-between w-full"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.04, rotate: -1 }}
             transition={{ duration: 0.25 }}
         >
             <div className="menu-img w-full h-40 sm:h-44 md:h-48 lg:h-56 relative overflow-hidden">
-                <img src={product.image} alt={product.name} loading="lazy" className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105" />
+                <img src={product.image} alt={product.name} loading="lazy" width={320} height={224} className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105" />
                 {hasOffer && announcements.filter(a => a.active).map(a => (
                   <div key={a.id} className="absolute top-2 left-2 bg-gradient-to-br from-[#ffb27a] to-[#ff9800] text-white text-xs font-bold px-2 py-1 rounded">{a.text.length > 20 ? '🔥 Offer' : a.text}</div>
                 ))}
                 <div className="absolute top-2 right-2">
-                    <button onClick={(e) => { e.stopPropagation(); onView && onView(product); }} className="bg-white/95 text-gray-800 p-2 rounded-full shadow-sm hover:scale-105 transition">
+                    <button onClick={(e) => { e.stopPropagation(); onView && onView(product); }} aria-label={`View details for ${product.name}`} className="bg-white/95 text-gray-800 p-2 rounded-full shadow-sm hover:scale-105 transition">
                         View
                     </button>
                 </div>
@@ -48,9 +47,9 @@ function ProductCard({ product, onView }) {
                         </button>
                     ) : (
                         <div className="w-full h-full flex items-center justify-between px-3 bg-[#fff3e0] border border-[#ff9800] rounded-lg">
-                            <button onClick={() => updateQuantity(product.id, -1)} className="p-1.5 bg-white text-[#ff9800] rounded-md shadow-sm hover:bg-gray-50 transition"><Minus size={18} /></button>
+                            <button onClick={() => updateQuantity(product.id, -1)} aria-label={`Remove one ${product.name}`} className="p-1.5 bg-white text-[#ff9800] rounded-md shadow-sm hover:bg-gray-50 transition"><Minus size={18} /></button>
                             <span className="font-bold text-gray-800 text-lg w-8 text-center">{cartItem.qty}</span>
-                            <button onClick={() => updateQuantity(product.id, 1)} className="p-1.5 bg-white text-[#ff9800] rounded-md shadow-sm hover:bg-gray-50 transition"><Plus size={18} /></button>
+                            <button onClick={() => updateQuantity(product.id, 1)} aria-label={`Add one more ${product.name}`} className="p-1.5 bg-white text-[#ff9800] rounded-md shadow-sm hover:bg-gray-50 transition"><Plus size={18} /></button>
                         </div>
                     )}
                 </div>

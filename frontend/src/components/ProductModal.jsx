@@ -42,11 +42,11 @@ export default function ProductModal({ product, onClose }) {
   };
 
   return (
-    <motion.div className="fixed inset-0 z-60 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label={`${product.name} details`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+    <motion.div className="fixed inset-0 z-[400] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label={`${product.name} details`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <div className="absolute inset-0 bg-black/50" onClick={onClose}></div>
       <motion.div initial={{ y: 20, scale: 0.98 }} animate={{ y: 0, scale: 1 }} exit={{ y: 10, scale: 0.98 }} className="relative z-10 bg-white rounded-2xl shadow-xl max-w-3xl w-full overflow-hidden">
         <div className="flex flex-col md:flex-row items-start gap-4 p-4">
-          <img src={product.image} alt={product.name} className="w-full md:w-48 h-48 object-cover rounded-lg" />
+          <img src={product.image} alt={product.name} width={192} height={192} className="w-full md:w-48 h-48 object-cover rounded-lg" />
           <div className="flex-1">
             <div className="flex justify-between items-start">
               <div>
@@ -73,9 +73,9 @@ export default function ProductModal({ product, onClose }) {
                 )}
 
                 <div className="flex items-center bg-gray-100 rounded-full px-2">
-                  <button onClick={() => setQty(q => Math.max(1, q - 1))} className="p-2 text-gray-700"><Minus /></button>
+                  <button onClick={() => setQty(q => Math.max(1, q - 1))} aria-label="Decrease quantity" className="p-2 text-gray-700"><Minus /></button>
                   <div className="px-4 font-bold">{qty}</div>
-                  <button onClick={() => setQty(q => q + 1)} className="p-2 text-gray-700"><Plus /></button>
+                  <button onClick={() => setQty(q => q + 1)} aria-label="Increase quantity" className="p-2 text-gray-700"><Plus /></button>
                 </div>
               </div>
             </div>

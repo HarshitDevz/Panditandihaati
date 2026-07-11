@@ -67,4 +67,4 @@ footer, .footer{ background: #2f2f2f !important; }
 .w-12.h-12.bg-gradient-to-br { background: linear-gradient(135deg,var(--muted),var(--accent)) !important; }
 
 /* make sure images/overlays look balanced */
-.menu-img img{ filter: saturate(0.95) contrast(0.98) !important; }
+.menu-img img{ filter: none !important; }

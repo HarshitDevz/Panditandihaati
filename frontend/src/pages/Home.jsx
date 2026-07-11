@@ -16,16 +16,41 @@ const gridItem = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
 };
 
-const card = (bg = '#fffdf8') => ({
-    position: 'relative',
-    zIndex: 2,
-    background: bg,
-    width: '100%',
-    maxWidth: '100%',
-    marginLeft: 0,
-    marginRight: 0,
-    padding: '48px 14px 48px',
-});
+function YoutubeFacade({ videoId }) {
+    const [loaded, setLoaded] = useState(false);
+    const wrapper = { position: 'relative', width: '100%', aspectRatio: '16/9', borderRadius: 16, overflow: 'hidden', boxShadow: '0 8px 32px rgba(0,0,0,0.22)', cursor: 'pointer' };
+    if (loaded) {
+        return (
+            <div style={wrapper}>
+                <iframe
+                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&modestbranding=1`}
+                    title="PM Modi Ji featuring Panditan Di Hatti Besan Barfi"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
+                />
+            </div>
+        );
+    }
+    return (
+        <div style={wrapper} onClick={() => setLoaded(true)} role="button" aria-label="Play PM Modi Ji video">
+            <img
+                src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+                alt="PM Modi Ji featuring Panditan Di Hatti — tap to play"
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                loading="lazy" width={720} height={405}
+            />
+            <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.28)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: 72, height: 72, background: '#ff0000', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 24px rgba(0,0,0,0.5)' }}>
+                    <svg viewBox="0 0 24 24" fill="white" width="34" height="34"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+            </div>
+            <div style={{ position: 'absolute', bottom: 12, left: '50%', transform: 'translateX(-50%)', background: 'rgba(0,0,0,0.55)', color: '#fff', padding: '5px 14px', borderRadius: 20, fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap' }}>Tap to play</div>
+        </div>
+    );
+}
 
 function Home() {
     const { products, businessInfo, announcements } = useData();
@@ -45,13 +70,6 @@ function Home() {
                             <span key={a.id} className="mx-8 font-bold text-sm tracking-wide">📢 {a.text}</span>
                         ))}
                     </div>
-                    <style>{`
-                        @keyframes marquee {
-                            0% { transform: translateX(0); }
-                            100% { transform: translateX(-50%); }
-                        }
-                        .animate-marquee { animation: marquee 30s linear infinite; }
-                    `}</style>
                 </div>
             )}
 
@@ -60,17 +78,17 @@ function Home() {
                 <div style={{ position: 'sticky', top: 0, zIndex: 1 }}>
                     <PremiumHero
                         title="Panditan Di Hatti"
-                        subtitle="A refined sweets and snacks counter, presented with a calm animated storefront and clear emphasis on quality, freshness, and trust."
+                        subtitle={<>A refined sweets and snacks counter, presented with a calm animated storefront and clear emphasis on quality, freshness, and trust.<br /><strong>Anu, Himachal Pradesh — 177005.</strong></>}
                         ctaText="View Menu"
                         eyebrow="Established 1980"
                         highlights={['Premium sweets', 'Fresh preparation', 'Trusted locally']}
-                        image="/images/shop.png"
-                        accentImage="/images/BESAN BARFI.png"
+                        image="/images/shop.webp"
+                        accentImage="/images/BESAN BARFI.webp"
                     />
                 </div>
 
                 {/* Card 1 — About: slides over Hero */}
-                <section className="about" style={{ position: 'relative', zIndex: 2, borderRadius: '32px 32px 0 0', background: '#fffdf8', boxShadow: '0 -16px 60px rgba(0,0,0,0.12)', width: '100%', minHeight: '100vh', padding: 'clamp(32px, 6vw, 64px) clamp(16px, 4vw, 48px)', maxWidth: '100%', margin: 0, display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
+                <section className="about" style={{ position: 'relative', zIndex: 2, borderRadius: '32px 32px 0 0', background: '#fffdf8', boxShadow: '0 -16px 60px rgba(0,0,0,0.12)', width: '100%', padding: 'clamp(32px, 6vw, 64px) clamp(16px, 4vw, 48px)', maxWidth: '100%', margin: 0, display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
                     <div className="section-shell about-shell" style={{ maxWidth: 1120, margin: '0 auto', width: '100%' }}>
                         <div className="section-copy">
                             <p className="section-kicker">Our Story</p>
@@ -83,14 +101,14 @@ function Home() {
                             </div>
                         </div>
                         <div className="section-media">
-                            <img src="images/OWNER.png" loading="lazy" alt="Owner of Panditan Di Hatti" width={440} height={440} />
+                            <img src="images/OWNER.webp" loading="lazy" alt="Owner of Panditan Di Hatti" width={440} height={440} />
                         </div>
                     </div>
                 </section>
             </div>
 
             {/* Card 2 — Menu */}
-            <section className="menu text-center" style={{ background: '#fff8f0', width: '100%', minHeight: '100vh', padding: 'clamp(32px, 6vw, 64px) clamp(16px, 4vw, 48px)', maxWidth: '100%', margin: 0, display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
+            <section className="menu text-center" style={{ background: '#fff8f0', width: '100%', padding: 'clamp(32px, 6vw, 64px) clamp(16px, 4vw, 48px)', maxWidth: '100%', margin: 0, display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
                 <div className="section-shell menu-shell" style={{ maxWidth: 1120, margin: '0 auto', width: '100%' }}>
                     <div className="section-copy text-center">
                         <p className="section-kicker">Signature Picks</p>
@@ -118,30 +136,19 @@ function Home() {
             </section>
 
             {/* Card 3 — PM Modi */}
-            <section className="modi-promo" style={{ background: '#fffdf8', width: '100%', minHeight: '100vh', padding: 'clamp(32px, 6vw, 64px) clamp(16px, 4vw, 48px)', maxWidth: '100%', margin: 0, display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
+            <section className="modi-promo" style={{ background: '#fffdf8', width: '100%', padding: 'clamp(32px, 6vw, 64px) clamp(16px, 4vw, 48px)', maxWidth: '100%', margin: 0, display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
                 <div className="section-shell flex flex-col items-center gap-6" style={{ maxWidth: 1120, margin: '0 auto', width: '100%' }}>
                     <div className="modi-text text-center">
                         <p className="section-kicker">Featured Mention</p>
                         <h2>PM Modi Ji Featured Us !!</h2>
                         <p>Coverage from public fan pages brought attention to our <strong>Besan Barfi</strong>, highlighting the product quality and local appeal.</p>
                     </div>
-                    <div className="video-wrapper w-full">
-                        <div className="video-overlay-text">Click on Speaker Button</div>
-                        <iframe
-                            src="https://www.youtube.com/embed/QOZa-VSTyek?autoplay=1&mute=1&loop=1&playlist=QOZa-VSTyek&modestbranding=1"
-                            loading="lazy"
-                            title="PM Modi Ji featuring Panditan Di Hatti Besan Barfi"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            referrerPolicy="no-referrer-when-downgrade"
-                        />
-                    </div>
+                    <YoutubeFacade videoId="QOZa-VSTyek" />
                 </div>
             </section>
 
             {/* Card 4 — Reviews */}
-            <section className="reviews-section" id="customer-reviews" style={{ background: '#fff8f0', width: '100%', minHeight: '100vh', padding: 'clamp(32px, 6vw, 64px) clamp(16px, 4vw, 48px)', maxWidth: '100%', margin: 0, display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
+            <section className="reviews-section" id="customer-reviews" style={{ background: '#fff8f0', width: '100%', padding: 'clamp(32px, 6vw, 64px) clamp(16px, 4vw, 48px)', maxWidth: '100%', margin: 0, display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
                 <div className="section-shell reviews-shell" style={{ maxWidth: 1120, margin: '0 auto', width: '100%' }}>
                     <div className="reviews-header">
                         <p className="section-kicker">Social proof</p>
@@ -150,12 +157,12 @@ function Home() {
                     </div>
                     <ReviewsCarousel items={[
                         { id: 1, name: 'Ramesh', rating: 5, image: 'images/1.avif', text: 'Best besan barfi I have ever had! Must try!' },
-                        { id: 2, name: 'Priya', rating: 4, image: 'images/3.png', text: 'Pure, tasty local Himachali flavors - I love it!' },
-                        { id: 3, name: 'Yuvraj', rating: 5, image: 'images/2.png', text: 'Whenever I visit Hamirpur, I never miss it!' },
-                        { id: 4, name: 'Anka', rating: 5, image: 'images/4.png', text: 'Best traditional Himachali sweets particularly besan ke barfi. Service is excellent and very well behaved shop owner and staff!! Must try Besan Ke Barfi!!' }
+                        { id: 2, name: 'Priya', rating: 4, image: 'images/3.webp', text: 'Pure, tasty local Himachali flavors - I love it!' },
+                        { id: 3, name: 'Yuvraj', rating: 5, image: 'images/2.webp', text: 'Whenever I visit Hamirpur, I never miss it!' },
+                        { id: 4, name: 'Anka', rating: 5, image: 'images/4.webp', text: 'Best traditional Himachali sweets particularly besan ke barfi. Service is excellent and very well behaved shop owner and staff!! Must try Besan Ke Barfi!!' }
                     ]} />
                     <div className="reviews-cta">
-                        <Link className="cta-btn" to="#">📝 Write a Review</Link>
+                        <a className="cta-btn" href="https://g.page/r/panditandihaati/review" target="_blank" rel="noopener noreferrer">📝 Write a Review</a>
                     </div>
                 </div>
             </section>

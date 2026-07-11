@@ -16,8 +16,11 @@ function Contact() {
                     allowFullScreen
                     loading="lazy"
                     title="Panditan Di Hatti location on Google Maps"
-                    referrerPolicy="no-referrer-when-downgrade">
-                </iframe>
+                    width="100%"
+                    height="400"
+                    style={{ border: 0, display: 'block', width: '100%', borderRadius: 12, marginTop: 16 }}
+                    referrerPolicy="no-referrer-when-downgrade"
+                />
             </section>
         </>
     );

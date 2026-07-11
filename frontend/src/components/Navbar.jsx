@@ -99,9 +99,9 @@ function Navbar() {
             }}
         >
         {/* Top info strip — slides up and hides on scroll */}
-            {businessInfo && !(isMobile && welcomeDismissedMobile) && (
+            {businessInfo && (
                 <div
-                    className="hidden md:flex items-center justify-center relative bg-black text-white text-sm font-medium px-6 overflow-hidden"
+                    className="flex items-center justify-between relative bg-black text-white text-sm font-medium px-4 overflow-hidden"
                     style={{
                         maxHeight: scrolled ? 0 : '40px',
                         paddingTop: scrolled ? 0 : '8px',
@@ -110,8 +110,8 @@ function Navbar() {
                         transition: 'max-height 0.35s ease, padding 0.35s ease, opacity 0.25s ease',
                     }}
                 >
-                    <span className="absolute left-6 text-xs text-gray-400 font-medium tracking-wide">📞 {businessInfo?.phone || '98166-51543'}</span>
-                    <div className="mx-2 text-center" style={{ fontFamily: "'Poppins', system-ui, sans-serif" }}>
+                    <span className="text-xs text-gray-400 font-medium tracking-wide hidden md:block">📞 {businessInfo?.phone || '98166-51543'}</span>
+                    <div className="mx-2 text-center hidden md:block flex-1" style={{ fontFamily: "'Poppins', system-ui, sans-serif" }}>
                         <span className="inline-flex items-center gap-3">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden focusable="false">
                                 <path fill="currentColor" d="M12.7 2.3c.6.6.6 1.6 0 2.2L9.6 7.6l.7.7c1.1 1.1 1.1 2.9 0 4l-2.2 2.2c-.8.8-2.1.8-2.9 0-.8-.8-.8-2.1 0-2.9l2.2-2.2c.6-.6 1-1.5 1-2.4 0-.9-.4-1.8-1-2.4L4.9 3.6C4.3 3 4.3 2 4.9 1.4c.6-.6 1.6-.6 2.2 0l2.8 2.8c.8.8 2 .8 2.8 0l.2-.2z" />
@@ -124,14 +124,16 @@ function Navbar() {
                             </svg>
                         </span>
                     </div>
-                    <span className="absolute right-6 text-xs text-gray-400 font-medium tracking-wide">GSTIN: 02AMWPS9440GIZK</span>
+                    <span className="text-xs font-mono font-semibold tracking-wider text-amber-400 ml-auto">GSTIN: 02AMWPS9440GIZK</span>
                 </div>
             )}
 
         <nav aria-label="Main navigation">
             {/* Hamburger — mobile only, LEFT side */}
-            <button className="hamburger" aria-label="Open menu" onClick={() => setMenuOpen(o => !o)} style={{ position: 'relative' }}>
-                <span></span><span></span><span></span>
+            <div style={{ position: 'relative' }}>
+                <button className="hamburger" aria-label="Open menu" onClick={() => setMenuOpen(o => !o)}>
+                    <span></span><span></span><span></span>
+                </button>
                 {menuOpen && (
                     <ul style={{ position: 'absolute', top: '110%', left: 0, width: '160px', background: 'var(--nav-bg)', borderRadius: '0 0 12px 12px', boxShadow: '0 8px 24px rgba(0,0,0,0.18)', padding: '8px', zIndex: 99, display: 'flex', flexDirection: 'column', gap: '4px', listStyle: 'none', margin: 0 }}>
                         {navLinks.map(l => (
@@ -139,7 +141,7 @@ function Navbar() {
                         ))}
                     </ul>
                 )}
-            </button>
+            </div>
 
             {/* Desktop nav links */}
             <ul className="nav-left flex-1" ref={listRef} style={{ position: 'relative' }}>
@@ -216,7 +218,7 @@ function ClockAndStatus({ businessInfo }) {
     return (
         <div className="flex items-center gap-3">
             <div className="text-sm text-white/90 font-medium tracking-wide">{formatTime(now)}</div>
-            <div className={`px-2 py-0.5 rounded-full text-xs font-semibold ${open ? 'bg-emerald-500 text-white animate-pulse' : 'bg-red-600 text-white'}`}>
+            <div className={`px-2 py-0.5 rounded-full text-xs font-semibold ${open ? 'bg-emerald-500 text-white' : 'bg-red-600 text-white'}`}>
                 {open ? 'Open' : 'Closed'}
             </div>
         </div>

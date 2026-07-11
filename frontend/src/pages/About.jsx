@@ -16,7 +16,7 @@ function About() {
                     With over <strong>1,250+ reviews</strong> averaging <strong>4.5★</strong>, we continue to be a trusted destination
                     for locals and visitors alike.
                 </p>
-                <img src="images/2owner.png" loading="lazy" alt="Owner of Panditan Di Hatti sweet shop" width={400} height={400} className="w-full max-w-sm mx-auto rounded-xl mt-4" />
+                <img src="images/2owner.webp" loading="lazy" alt="Owner of Panditan Di Hatti sweet shop" width={400} height={400} className="w-full max-w-sm mx-auto rounded-xl mt-4" />
 
                 <br /><br />
 
@@ -27,7 +27,7 @@ function About() {
                     well-regarded for its fresh and flavorful treats. Visitors often praise the excellent service and the quality of
                     the sweets, making it a must-visit for those looking to indulge in authentic sweets.
                 </p>
-                <img src="images/shop.png" loading="lazy" alt="Panditan Di Hatti shop front in Hamirpur" width={1000} height={600} className="shop-img w-full max-w-full" />
+                <img src="images/shop.webp" loading="lazy" alt="Panditan Di Hatti shop front in Hamirpur" width={1000} height={600} className="shop-img w-full max-w-full" />
             </section>
         </>
     );

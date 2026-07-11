@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
 @import './styles/theme-neutral.css';
 
 @tailwind base;
@@ -216,9 +215,8 @@ section h2 {
   gap: 24px;
   border: 1px solid rgba(164, 97, 22, 0.12);
   border-radius: 28px;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.92);
   box-shadow: 0 24px 70px rgba(79, 48, 15, 0.08);
-  backdrop-filter: blur(14px);
   padding: 28px;
 }
 
@@ -394,8 +392,23 @@ section h2 {
 }
 
 .video-wrapper {
-  border: 1px solid rgba(164, 97, 22, 0.14);
-  background: #fff;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 .about img {
@@ -484,61 +497,20 @@ section h2 {
   font-size: 0.9em;
 }
 
-.modi-promo {
-  max-width: 960px;
-  margin: 60px auto;
-  padding: 0 16px;
-  text-align: center;
-}
-
-.modi-text h2 {
-  font-size: 30px;
-  color: var(--accent-dark);
-  margin-bottom: 10px;
-  font-weight: 700;
-}
-
-.modi-text p {
-  font-size: 17px;
-  color: #333;
-  margin-bottom: 24px;
-  line-height: 1.5;
-}
-
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 720px;
-  margin: 0 auto;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-}
-
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
 .video-overlay-text {
   position: absolute;
   top: 12px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(111,97,88,0.85);
+  background: rgba(0,0,0,0.6);
   color: white;
-  padding: 8px 16px;
-  font-size: 18px;
+  padding: 6px 14px;
+  font-size: 14px;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 20px;
   z-index: 2;
   pointer-events: none;
+  white-space: nowrap;
 }
 
 .opening-hours {
@@ -961,6 +933,13 @@ footer,
 .back-login a:hover {
   text-decoration: underline;
 }
+
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.animate-marquee { animation: marquee 30s linear infinite; }
+
+@keyframes marqueeLR { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+.offer-marquee { display: inline-block; padding-left: 100%; white-space: nowrap; animation: marqueeLR 14s linear infinite; }
+.offer-ticker:hover .offer-marquee { animation-play-state: paused; }
 
 @keyframes fadeIn {
   0% {

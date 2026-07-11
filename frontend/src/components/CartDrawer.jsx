@@ -26,18 +26,22 @@ function CartDrawer() {
             {isCartOpen && (
                 <>
                     <motion.div
-                        className="fixed inset-0 bg-black/50 z-[100]"
+                        className="fixed inset-0 z-[300] flex justify-end"
                         onClick={() => setIsCartOpen(false)}
+                        onTouchEnd={() => setIsCartOpen(false)}
                         initial={{ opacity: 0 }}
-                        animate={{ opacity: 0.5 }}
+                        animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                    />
+                    >
+                        <div className="absolute inset-0 bg-black/50" />
                     <motion.aside
-                        className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-[#fffdf6] shadow-2xl z-[101] flex flex-col"
+                        className="relative w-full max-w-sm bg-[#fffdf6] shadow-2xl flex flex-col h-full"
                         initial={{ x: '100%' }}
                         animate={{ x: 0 }}
                         exit={{ x: '100%' }}
                         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                        onClick={e => e.stopPropagation()}
+                        onTouchEnd={e => e.stopPropagation()}
                     >
                         <div className="flex justify-between items-center p-4 border-b border-gray-200">
                             <h2 className="text-xl font-bold flex items-center gap-2"><ShoppingCart className="text-[#ff9800]" /> Your Cart</h2>
@@ -55,9 +59,9 @@ function CartDrawer() {
                                             <p className="text-sm text-gray-500">₹{item.price} / {item.unit}</p>
                                         </div>
                                         <div className="flex items-center gap-2 bg-gray-50 rounded-md p-1 border border-gray-200 shadow-sm ml-2">
-                                            <button onClick={() => updateQuantity(item.id, -1)} className="p-1 bg-white hover:bg-gray-100 rounded-sm transition"><Minus size={16} className="text-gray-600" /></button>
+                                            <button onClick={() => updateQuantity(item.id, -1)} aria-label={`Remove one ${item.name}`} className="p-1 bg-white hover:bg-gray-100 rounded-sm transition"><Minus size={16} className="text-gray-600" /></button>
                                             <span className="w-5 text-center text-sm font-bold">{item.qty}</span>
-                                            <button onClick={() => updateQuantity(item.id, 1)} className="p-1 bg-white hover:bg-gray-100 rounded-sm transition"><Plus size={16} className="text-gray-600" /></button>
+                                            <button onClick={() => updateQuantity(item.id, 1)} aria-label={`Add one more ${item.name}`} className="p-1 bg-white hover:bg-gray-100 rounded-sm transition"><Plus size={16} className="text-gray-600" /></button>
                                         </div>
                                     </div>
                                 ))
@@ -79,6 +83,7 @@ function CartDrawer() {
                             </div>
                         )}
                     </motion.aside>
+                    </motion.div>
                 </>
             )}
         </AnimatePresence>

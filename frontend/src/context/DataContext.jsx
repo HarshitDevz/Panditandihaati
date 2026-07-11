@@ -8,7 +8,7 @@ const defaultProducts = [
         name: '⭐ Besan Barfi',
         unit: '1kg',
         price: 320,
-        image: 'images/BESAN BARFI.png',
+        image: 'images/BESAN BARFI.webp',
         desc: 'Famous all over Himachal. Soft, golden, full of rich flavor.',
         visible: true,
         category: 'Sweets'
@@ -18,7 +18,7 @@ const defaultProducts = [
         name: 'Motichoor Laddoo',
         unit: '1kg',
         price: 280,
-        image: 'images/Motichoor Laddoo.jpg',
+        image: 'images/Motichoor Laddoo.webp',
         desc: 'Spherical joy of every celebration!',
         visible: true,
         category: 'Sweets'
@@ -28,7 +28,7 @@ const defaultProducts = [
         name: 'Rasgulla',
         unit: '1kg',
         price: 250,
-        image: 'images/Rasgulla.jpeg',
+        image: 'images/Rasgulla.webp',
         desc: 'Soft, spongy, syrupy sweet.',
         visible: true,
         category: 'Sweets'
@@ -38,7 +38,7 @@ const defaultProducts = [
         name: 'Samosa',
         unit: 'piece',
         price: 15,
-        image: 'images/Samosa.jpg',
+        image: 'images/Samosa.webp',
         desc: 'Crispy, spicy triangles of delight.',
         visible: true,
         category: 'Snacks'
@@ -48,7 +48,7 @@ const defaultProducts = [
         name: 'Paneer Pakoda',
         unit: 'piece',
         price: 25,
-        image: 'images/Paneer Pakoda.jpeg',
+        image: 'images/Paneer Pakoda.webp',
         desc: 'Fried cheese perfection.',
         visible: true,
         category: 'Snacks'
@@ -75,8 +75,20 @@ const defaultBusinessInfo = {
 
 export function DataProvider({ children }) {
     const [products, setProducts] = useState(() => {
-        const saved = localStorage.getItem('pdh_products');
-        return saved ? JSON.parse(saved) : defaultProducts;
+        try {
+            const saved = localStorage.getItem('pdh_products');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                // Bust old PNG/JPG image cache — migrate to WebP
+                const needsMigration = parsed.some(p => p.image && /\.(png|jpg|jpeg)$/i.test(p.image));
+                if (needsMigration) {
+                    localStorage.removeItem('pdh_products');
+                    return defaultProducts;
+                }
+                return parsed;
+            }
+        } catch {}
+        return defaultProducts;
     });
 
     const [businessInfo, setBusinessInfo] = useState(() => {
