@@ -47,7 +47,7 @@ export default function SplashScreen({ onDone }) {
                     </motion.h1>
                     <motion.p
                         {...item(0.2)}
-                        style={{ color: '#1a0a00', fontSize: 'clamp(11px, 2.8vw, 14px)', margin: 0, letterSpacing: 4, textTransform: 'uppercase', fontWeight: 800, textAlign: 'center', lineHeight: 1.7 }}
+                        style={{ color: '#FFF8F3', fontSize: 'clamp(11px, 2.8vw, 14px)', margin: 0, letterSpacing: 4, textTransform: 'uppercase', fontWeight: 800, textAlign: 'center', lineHeight: 1.7 }}
                     >
                         Taste of<br />Hamirpur, Himachal Pradesh
                     </motion.p>
