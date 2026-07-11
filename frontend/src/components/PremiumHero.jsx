@@ -5,12 +5,12 @@ import { useData } from '../context/DataContext';
 
 const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.03 } }
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } }
 };
 
 const line = {
-  hidden: { opacity: 0, y: 6 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.2, ease: 'easeOut' } }
+  hidden: { opacity: 0, y: 22 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } }
 };
 
 function ClockBadge({ businessInfo }) {
@@ -94,7 +94,7 @@ export default function PremiumHero({
           </motion.div>
         </motion.div>
 
-        <motion.div className="relative z-10 mx-auto w-full max-w-xl" initial={{ opacity: 0, y: 24, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.75, ease: 'easeOut' }}>
+        <motion.div className="relative z-10 mx-auto w-full max-w-xl" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}>
           <div className="rounded-[2rem] border border-white/85 bg-white/90 p-3 shadow-[0_24px_70px_rgba(77,48,15,0.14)] flex flex-col gap-3">
             <div className="relative overflow-hidden rounded-[1.6rem]">
               <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.4),rgba(255,255,255,0.05))]" />
