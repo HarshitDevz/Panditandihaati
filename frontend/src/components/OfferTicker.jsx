@@ -4,7 +4,7 @@ import { useData } from '../context/DataContext';
 export default function OfferTicker() {
   const { announcements } = useData();
   const active = announcements.filter(a => a.active);
-  const offer = active.length > 0 ? active[0] : { text: 'Get 10% off on Besan Barfi today!' };
+  const offer = active.length > 0 ? active[0] : { text: ' Dont Forget To Try Besan Barfi today!' };
 
   return (
     <div className="offer-ticker w-full bg-[#fff7ed] border-t border-b border-[#ffecd1] overflow-hidden">

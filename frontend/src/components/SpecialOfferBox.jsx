@@ -6,7 +6,7 @@ export default function SpecialOfferBox() {
   const { announcements, businessInfo } = useData();
   if (businessInfo && businessInfo.maintenance) return null;
   const active = announcements.filter(a => a.active);
-  const offer = active.length > 0 ? active[0] : { text: 'Get 10% off on Besan Barfi today!', cta: 'MENU' };
+  const offer = active.length > 0 ? active[0] : { text: ' Dont Forget To Try Besan Barfi today!', cta: 'MENU' };
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(true);
 
