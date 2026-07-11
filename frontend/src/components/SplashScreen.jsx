@@ -62,7 +62,7 @@ export default function SplashScreen({ onDone }) {
                         {...item(0.45)}
                         style={{ marginTop: 6 }}
                     >
-                        <motion.svg
+                        {/* <motion.svg
                             width="48" height="48" viewBox="0 0 24 24" fill="none"
                             animate={{ filter: ['drop-shadow(0 0 6px #ffb347)', 'drop-shadow(0 0 18px #ff8c00)', 'drop-shadow(0 0 6px #ffb347)'] }}
                             transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
@@ -70,7 +70,7 @@ export default function SplashScreen({ onDone }) {
                             <path d="M12 2C6.48 2 2 6.48 2 12C2 15.55 3.82 18.68 6.63 20.48L7.5 19.1C5.19 17.57 3.66 14.95 3.66 12C3.66 7.4 7.4 3.66 12 3.66C16.6 3.66 20.34 7.4 20.34 12C20.34 14.95 18.81 17.57 16.5 19.1L17.37 20.48C20.18 18.68 22 15.55 22 12C22 6.48 17.52 2 12 2Z" fill="#FFF8F3"/>
                             <path d="M12 6C9.24 6 7 8.24 7 11C7 13.76 9.24 16 12 16C14.76 16 17 13.76 17 11C17 8.24 14.76 6 12 6Z" fill="#FFF8F3"/>
                             <path d="M9 19.5V22H15V19.5H9Z" fill="#FFF8F3"/>
-                        </motion.svg>
+                        </motion.svg> */}
                     </motion.div>
                 </motion.div>
             )}
