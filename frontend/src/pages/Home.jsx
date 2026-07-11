@@ -78,7 +78,7 @@ function Home() {
                 <div style={{ position: 'sticky', top: 0, zIndex: 1 }}>
                     <PremiumHero
                         title="Pandittan Di Hatti"
-                        subtitle={<>A refined sweets and snacks counter, presented with a calm animated storefront and clear emphasis on quality, freshness, and trust.<br /><strong>Anu, Himachal Pradesh — 177005.</strong></>}
+                        subtitle={<>A refined sweets and snacks counter, presented with a calm animated storefront and clear emphasis on quality, freshness, and trust.<br /><strong>Anu, Hamirpur, Himachal Pradesh — 177005.</strong></>}
                         ctaText="View Menu"
                         eyebrow="Established 1980"
                         highlights={['Premium sweets', 'Fresh preparation', 'Trusted locally']}
@@ -161,9 +161,9 @@ function Home() {
                         { id: 3, name: 'Yuvraj', rating: 5, image: 'images/2.webp', text: 'Whenever I visit Hamirpur, I never miss it!' },
                         { id: 4, name: 'Anka', rating: 5, image: 'images/4.webp', text: 'Best traditional Himachali sweets particularly besan ke barfi. Service is excellent and very well behaved shop owner and staff!! Must try Besan Ke Barfi!!' }
                     ]} />
-                    <div className="reviews-cta">
+                    {/* <div className="reviews-cta">
                         <a className="cta-btn" href="https://g.page/r/Pandittandihaati/review" target="_blank" rel="noopener noreferrer">📝 Write a Review</a>
-                    </div>
+                    </div> */}
                 </div>
             </section>
         </>

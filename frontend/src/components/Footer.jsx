@@ -52,63 +52,22 @@ function Footer() {
 
                 {/* Middle: Opening hours */}
                 <div className="order-3 md:order-2">
-                    <h3 className="text-lg font-bold text-gray-100 mb-3">Opening Hours</h3>
-                    <div className="grid grid-cols-1 gap-2 text-sm text-gray-300">
+                    <h3 className="text-lg font-bold text-gray-100 mb-3 text-center">Opening Hours</h3>
+                    <table className="w-full text-sm">
+                        <tbody>
                         {Object.entries(hours).map(([day, time]) => {
                             const todayName = new Date().toLocaleDateString('en-US', { weekday: 'long' });
                             const isToday = day === todayName;
-
-                            const parseTimeRange = (t) => {
-                                if (!t || /closed/i.test(t)) return null;
-                                const parts = t.split(/[-–—]/).map(s => s.trim());
-                                if (parts.length < 2) return null;
-                                const parsePart = (p) => {
-                                    // p like '08:00 AM' or '08:30 PM'
-                                    const m = p.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-                                    if (!m) return null;
-                                    let hh = parseInt(m[1], 10);
-                                    const mm = parseInt(m[2], 10);
-                                    const ampm = m[3].toUpperCase();
-                                    if (ampm === 'PM' && hh !== 12) hh += 12;
-                                    if (ampm === 'AM' && hh === 12) hh = 0;
-                                    const d = new Date();
-                                    d.setHours(hh, mm, 0, 0);
-                                    return d;
-                                };
-                                const start = parsePart(parts[0]);
-                                const end = parsePart(parts[1]);
-                                return { start, end };
-                            };
-
-                            const range = parseTimeRange(time);
-                            let openNow = false;
-                            if (range && range.start && range.end) {
-                                const now = new Date();
-                                // if end is earlier than start, assume it goes past midnight
-                                if (range.end <= range.start) {
-                                    // treat end as next day
-                                    range.end.setDate(range.end.getDate() + 1);
-                                }
-                                openNow = now >= range.start && now <= range.end && isToday;
-                            }
-
                             return (
-                                <div key={day} className={`flex items-center justify-between py-2 px-3 rounded-lg gap-2 ${isToday ? 'bg-white/3 ring-1 ring-white/5' : ''}`}>
-                                    <div className="flex items-center gap-2 flex-wrap min-w-0">
-                                        <span className="w-24 text-sm font-medium text-gray-200 flex-shrink-0">{day}</span>
-                                        <span className="text-sm text-gray-300 truncate">{time}</span>
-                                    </div>
-                                    <div className="ml-2">
-                                        {isToday && (
-                                            <span className={`px-2 py-0.5 text-xs rounded-full font-semibold ${openNow ? 'bg-emerald-500 text-white' : 'bg-red-500 text-white'}`}>
-                                                {openNow ? 'Open now' : 'Closed'}
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
+                                <tr key={day} className={`border-b border-white/5 ${isToday ? 'bg-white/5' : ''}`}>
+                                    <td className={`py-2 pr-4 font-semibold w-28 ${isToday ? 'text-[#ff9800]' : 'text-gray-300'}`}>{day}</td>
+                                    <td className="py-2 text-gray-400">{time}</td>
+                                    {isToday && <td className="py-2 pl-2"><span className="px-2 py-0.5 text-xs rounded-full font-bold bg-emerald-500 text-white">Today</span></td>}
+                                </tr>
                             );
                         })}
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
 
                 {/* Right: Map */}

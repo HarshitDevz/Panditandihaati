@@ -45,12 +45,18 @@ export default function SplashScreen({ onDone }) {
                         Pandittan Di Hatti
                     </motion.h1>
                     <motion.p
-                        {...item(0.22)}
+                        {...item(0.2)}
+                        style={{ color: '#1a0a00', fontSize: 'clamp(11px, 2.8vw, 14px)', margin: 0, letterSpacing: 4, textTransform: 'uppercase', fontWeight: 800 }}
+                    >
+                        Taste of Hamirpur, Himachal Pradesh
+                    </motion.p>
+                    <motion.p
+                        {...item(0.3)}
                         style={{ color: '#F6ECE6bb', fontSize: 'clamp(12px, 3vw, 15px)', margin: 0, letterSpacing: 3, textTransform: 'uppercase' }}
                     >
                         Welcomes You
                     </motion.p>
-                    <motion.div {...item(0.32)} style={{ width: 40, height: 3, background: '#E0893A', borderRadius: 2 }} />
+                    <motion.div {...item(0.38)} style={{ width: 40, height: 3, background: '#E0893A', borderRadius: 2 }} />
                 </motion.div>
             )}
         </AnimatePresence>

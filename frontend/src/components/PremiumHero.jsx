@@ -5,12 +5,12 @@ import { useData } from '../context/DataContext';
 
 const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.04 } }
+  visible: { transition: { staggerChildren: 0.03 } }
 };
 
 const line = {
-  hidden: { opacity: 0, y: 8 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.25, ease: 'easeOut' } }
+  hidden: { opacity: 0, y: 6 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.2, ease: 'easeOut' } }
 };
 
 function ClockBadge({ businessInfo }) {
@@ -31,7 +31,7 @@ function ClockBadge({ businessInfo }) {
 }
 
 export default function PremiumHero({
-  title = 'Pandittan Di Hatti',
+  title = 'Panditan Di Hatti',
   subtitle,
   ctaText = 'Order Now',
   eyebrow = 'Established 1980',
@@ -43,6 +43,7 @@ export default function PremiumHero({
   const { businessInfo } = useData();
 
   const words = String(title).split(' ');
+  const mobileSubtitle = 'Anu, Hamirpur, Himachal Pradesh — 177005.';
 
   return (
     <motion.header ref={ref} className="hero relative overflow-hidden bg-gradient-to-br from-[#fffaf3] via-[#fff7ef] to-[#fffdf9] px-4 py-4 md:px-10 md:py-20" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
@@ -58,7 +59,7 @@ export default function PremiumHero({
             {eyebrow}
           </motion.div>
 
-          <motion.h1 className="overflow-hidden text-left text-xl font-black leading-[0.94] tracking-tight text-[#21140f] sm:text-4xl md:text-6xl lg:text-7xl">
+          <motion.h1 className="overflow-hidden text-left text-2xl font-black leading-[0.94] tracking-tight text-[#21140f] sm:text-4xl md:text-6xl lg:text-7xl">
             {words.map((word, index) => (
               <motion.span key={`${word}-${index}`} className="mr-3 inline-block" variants={line}>
                 {word}
@@ -66,11 +67,15 @@ export default function PremiumHero({
             ))}
           </motion.h1>
 
-          <motion.p className="mt-2 max-w-xl text-left text-xs leading-5 text-[#5a4a3a] md:text-lg" variants={line}>
+          {/* Mobile: address only. Desktop: full subtitle */}
+          <motion.p className="mt-2 max-w-xl text-left text-sm leading-6 text-[#5a4a3a] md:hidden" variants={line}>
+            <strong>{mobileSubtitle}</strong>
+          </motion.p>
+          <motion.p className="mt-5 max-w-xl text-left text-base leading-7 text-[#5a4a3a] hidden md:block md:text-lg" variants={line}>
             {subtitle || `A refined sweets counter offering traditional mithai, savoury snacks, and dependable daily service.`}
           </motion.p>
 
-          <motion.div variants={line} className="mt-3 flex flex-wrap items-center gap-2">
+          <motion.div variants={line} className="mt-4 flex flex-wrap items-center gap-3">
             <Link to="/menu" className="relative inline-flex items-center">
               <motion.button whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.98 }} transition={{ duration: 0.18 }} className="rounded-2xl bg-[#ff9800] px-7 py-3 text-sm font-bold text-white shadow-[0_18px_40px_rgba(255,152,0,0.32)]">
                 {ctaText}
@@ -80,7 +85,7 @@ export default function PremiumHero({
             <ClockBadge businessInfo={businessInfo} />
           </motion.div>
 
-          <motion.div variants={line} className="mt-2 flex flex-wrap gap-2">
+          <motion.div variants={line} className="mt-3 flex flex-wrap gap-2">
             {highlights.map((item) => (
               <div key={item} className="rounded-full border border-[#e4d2bc] bg-white/95 px-4 py-2 text-sm font-semibold text-[#61442e] shadow-sm">
                 {item}
@@ -95,13 +100,12 @@ export default function PremiumHero({
               <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.4),rgba(255,255,255,0.05))]" />
               <motion.img
                 src={image}
-                alt="Pandittan Di Hatti shop front in Hamirpur, Himachal Pradesh"
+                alt="Panditan Di Hatti shop front in Hamirpur, Himachal Pradesh"
                 width={600}
                 height={460}
                 fetchPriority="high"
                 className="w-full h-auto block rounded-[1.6rem]"
                 style={{ position: 'relative' }}
-
               />
             </div>
 
